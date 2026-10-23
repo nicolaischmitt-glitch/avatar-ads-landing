@@ -201,7 +201,7 @@ fbq('track', 'PageView');
   .pill{position:absolute;top:10px;left:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:var(--neon);color:var(--bg);padding:3px 7px;border-radius:6px}
   .fine-print{margin-top:14px;font-size:12px;line-height:1.45;color:var(--meta)}
 
-  /* ===== $27 en cada herramienta ===== */
+  /* ===== Costo por anuncio: Avatar Ads vs. otras herramientas ===== */
   .hl{color:var(--neon)}
   .spend{display:grid;gap:12px;margin-top:24px}
   .sp-card{border:1px solid var(--line);border-radius:18px;background:var(--bg);padding:16px}
@@ -221,6 +221,9 @@ fbq('track', 'PageView');
   .tiles i.maybe::after{display:none}
   .js .tiles i{opacity:0;transform:scale(.4)}
   .spend.in .tiles i{opacity:1;transform:none;transition:opacity .3s ease, transform .3s cubic-bezier(.3,1.6,.5,1);transition-delay:calc(var(--i) * 18ms)}
+  .sp-tools{list-style:none;margin-top:14px;border-top:1px solid var(--line-soft);padding-top:10px;display:grid;gap:6px}
+  .sp-tools li{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;color:var(--meta)}
+  .sp-tools b{font-family:var(--mono);font-weight:500;color:var(--text-2)}
   .sp-legend{display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;margin-top:12px;font-size:12.5px;color:var(--text-2)}
   .sp-legend i{width:9px;display:inline-block;vertical-align:middle;background:var(--neon)}
 
@@ -318,7 +321,7 @@ fbq('track', 'PageView');
     .split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
     .split > :first-child h2{margin-top:14px}
     .who,.vs{grid-template-columns:1fr 1fr}
-    .spend{grid-template-columns:repeat(3,1fr)}
+    .spend{grid-template-columns:1fr 1fr;align-items:start}
     .xy{padding:22px 22px 12px}
     .narrow-p{max-width:720px}
     .proof-wide{max-width:620px;margin-left:auto;margin-right:auto}
@@ -514,27 +517,28 @@ fbq('track', 'PageView');
   <div class="wrap narrow">
     <span class="label">El sistema más económico</span>
     <h2>Calidad hiperrealista, <span class="b">por centavos.</span></h2>
-    <p class="muted">Imagina que pones <b class="hl">$27</b> en cada herramienta. ¿Cuántos anuncios de 30 segundos te salen?</p>
+    <p class="muted">En otras herramientas de video con IA, un anuncio de 30 segundos te cuesta en promedio <b class="hl">~$13</b>. Con ese mismo dinero, con el Sistema Avatar Ads haces <b class="hl">~35</b>.</p>
 
     <div class="spend" id="spend">
       <div class="sp-card win">
         <div class="sp-top"><span class="sp-name">Sistema Avatar Ads</span><span class="sp-cost">~$0,37 / anuncio</span></div>
-        <div class="sp-num"><b>~70</b><span>anuncios</span></div>
-        <div class="tiles" data-n="70" aria-hidden="true"></div>
+        <div class="sp-num"><b>~35</b><span>anuncios con $13</span></div>
+        <div class="tiles" data-n="35" aria-hidden="true"></div>
       </div>
       <div class="sp-card">
-        <div class="sp-top"><span class="sp-name">Wan 2.5</span><span class="sp-cost">~$3 / anuncio</span></div>
-        <div class="sp-num"><b>~9</b><span>anuncios</span></div>
-        <div class="tiles" data-n="9" aria-hidden="true"></div>
-      </div>
-      <div class="sp-card">
-        <div class="sp-top"><span class="sp-name">Seedance 2.0</span><span class="sp-cost">$3–$14 / anuncio</span></div>
-        <div class="sp-num"><b>2–9</b><span>anuncios</span></div>
-        <div class="tiles" data-n="2" data-maybe="7" aria-hidden="true"></div>
+        <div class="sp-top"><span class="sp-name">Otras herramientas (promedio)</span><span class="sp-cost">~$13 / anuncio</span></div>
+        <div class="sp-num"><b>1</b><span>anuncio con $13</span></div>
+        <div class="tiles" data-n="1" aria-hidden="true"></div>
+        <ul class="sp-tools">
+          <li><span>Wan 2.5</span><b>~$3</b></li>
+          <li><span>Seedance 2.0 · API oficial</span><b>~$11</b></li>
+          <li><span>Seedance 2.5</span><b>~$17</b></li>
+          <li><span>Seedance 2.0 · fal.ai</span><b>~$20</b></li>
+        </ul>
       </div>
     </div>
-    <p class="sp-legend"><i></i> 1 anuncio de 30 s con $27 <i class="maybe"></i> según la plataforma</p>
-    <p class="fine-print">Avatar Ads: costo real de nuestro reel de podcast (43 s de video, $0,53 en generación). Wan 2.5 y Seedance 2.0: precios públicos de API a octubre de 2026 (720p–1080p). Solo generación, sin regeneraciones; los precios varían según la plataforma y la resolución.</p>
+    <p class="sp-legend"><i></i> 1 anuncio de 30 segundos</p>
+    <p class="fine-print">Sistema Avatar Ads: costo real de generación de nuestro reel de podcast (43 s de video por $0,53), llevado a 30 s. Otras herramientas: precio público por segundo a octubre de 2026 × 30 s (Wan 2.5 ~$0,10/s; Seedance 2.0 en 1080p: $0,37/s en la API oficial de BytePlus y $0,68/s en fal.ai; Seedance 2.5 en 1080p: $0,57/s); el promedio es el de estas cuatro opciones. Solo generación, sin regeneraciones; los precios varían según la plataforma y la resolución.</p>
   </div>
 </section>
 
@@ -798,7 +802,7 @@ fbq('track', 'PageView');
     proofVids.forEach((v) => pio.observe(v));
   }
 
-  // $27 en cada herramienta: un mosaico por anuncio
+  // Costo por anuncio: un mosaico por anuncio
   document.querySelectorAll(".tiles").forEach((t) => {
     const n = +t.dataset.n, maybe = +(t.dataset.maybe || 0);
     for (let i = 0; i < n + maybe; i++) {
