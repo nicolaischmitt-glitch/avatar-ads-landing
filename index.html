@@ -102,6 +102,16 @@ fbq('track', 'PageView');
   .snd[aria-pressed="true"] .off{display:none}
   .snd[aria-pressed="true"]{bottom:auto;top:12px;left:auto;right:12px;transform:none;padding:8px}
   .snd[aria-pressed="true"] .txt{display:none}
+  /* Reproductor del VSL: pausa con un toque, sonido aparte y barra de progreso que se puede arrastrar */
+  .vsl-big{position:absolute;left:50%;top:50%;z-index:2;width:72px;height:72px;margin:-36px 0 0 -36px;border-radius:50%;display:none;align-items:center;justify-content:center;background:rgba(2,6,4,.65);border:1.5px solid var(--neon);color:var(--neon);pointer-events:none}
+  .vsl-on.vsl-paused .vsl-big{display:flex}
+  .vsl-bar{position:absolute;left:0;right:0;bottom:0;z-index:3;height:30px;display:none;align-items:flex-end;cursor:pointer;touch-action:none}
+  .vsl-on .vsl-bar{display:flex}
+  .vsl-track{position:relative;width:100%;height:5px;background:rgba(248,248,248,.28)}
+  .vsl-fill{display:block;height:100%;width:0;background:var(--neon);box-shadow:0 0 10px rgba(197,247,64,.8)}
+  .vsl-knob{position:absolute;left:0;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--neon)}
+  .vsl-on .snd{bottom:42px}
+  .vsl-on .snd[aria-pressed="true"]{bottom:auto}
   .hero-video{margin:0 auto 28px;max-width:300px}
   .video-caption{margin-top:10px;text-align:center;font-size:13px;color:var(--meta)}
   .video-caption.top{margin:0 0 8px;display:flex;align-items:flex-end;justify-content:center;gap:6px;white-space:nowrap;font-size:13.5px;font-weight:500;color:var(--text-2)}
@@ -406,7 +416,9 @@ fbq('track', 'PageView');
           <svg class="arrow" width="22" height="26" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2c8 1 13 7 12 19"/><path d="M10 17l5 5 4-6"/></svg>
         </figcaption>
         <div class="video-slot">
-          <video src="videos/vsl-avatar-ads.mp4?v=2" poster="videos/vsl-avatar-ads.jpg?v=2" playsinline muted loop preload="metadata" aria-label="Video de Avatar Ads 1.0 creado con IA: cómo funciona el sistema"></video>
+          <video id="vsl" src="videos/vsl-avatar-ads.mp4?v=2" poster="videos/vsl-avatar-ads.jpg?v=2" playsinline muted loop preload="metadata" aria-label="Video de Avatar Ads 1.0 creado con IA: cómo funciona el sistema"></video>
+          <span class="vsl-big" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+          <div class="vsl-bar" role="slider" tabindex="0" aria-label="Avance del video" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="vsl-track"><i class="vsl-fill"></i><i class="vsl-knob"></i></div></div>
           <button type="button" class="snd" aria-pressed="false" aria-label="Activar sonido">
             <svg class="off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
             <svg class="on" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a10 10 0 010 14"/></svg>
@@ -809,7 +821,8 @@ fbq('track', 'PageView');
 
   // Videos: se reproducen en silencio al entrar en pantalla y se pausan al salir.
   // "Activar sonido" reinicia ese video con audio y silencia los demás.
-  const vids = [...document.querySelectorAll(".video-slot video")];
+  const vsl = document.getElementById("vsl");
+  const vids = [...document.querySelectorAll(".video-slot video:not(#vsl)")];
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const btnOf = (v) => v.parentElement.querySelector(".snd");
   function setSound(v, on){
@@ -822,7 +835,7 @@ fbq('track', 'PageView');
     const turnOn = v.muted;
     vids.forEach((o) => { if (o !== v) setSound(o, false); });
     setSound(v, turnOn);
-    if (turnOn) { v.currentTime = 0; v.play().catch(() => {}); }
+    if (turnOn) { v.currentTime = 0; v.play().catch(() => {}); pauseVsl(); }
   }
   vids.forEach((v) => {
     btnOf(v).addEventListener("click", () => toggleSound(v));
@@ -836,6 +849,65 @@ fbq('track', 'PageView');
       });
     }, { threshold: 0.6 });
     vids.forEach((v) => io.observe(v));
+  }
+
+  // VSL del inicio: arranca en silencio y en bucle. El primer toque lo reinicia una sola vez con sonido; desde ahí,
+  // tocar el video pausa o reanuda sin perder el punto, el sonido va aparte y la barra se puede arrastrar para adelantar.
+  // La barra avanza rápido al principio y se va haciendo lenta, para que el video se sienta corto. Video y barra se
+  // convierten con la misma curva, así que arrastrarla siempre cae en el punto correcto.
+  const vslSlot = vsl.parentElement, vslSnd = vslSlot.querySelector(".snd"), vslBar = vslSlot.querySelector(".vsl-bar");
+  const vslFill = vslSlot.querySelector(".vsl-fill"), vslKnob = vslSlot.querySelector(".vsl-knob");
+  const toBar = (x) => 1 - (1 - x) ** 2;
+  const toVideo = (p) => 1 - Math.sqrt(1 - p);
+  let vslStarted = false, vslUserPaused = false, vslDragging = false;
+  function pauseVsl(){ if (vslStarted && !vsl.paused) { vsl.pause(); vslUserPaused = true; } }
+  function vslDraw(p){
+    vslFill.style.width = vslKnob.style.left = (p * 100) + "%";
+    vslBar.setAttribute("aria-valuenow", Math.round(p * 100));
+  }
+  function vslUpdate(){ if (!vslDragging && vsl.duration) vslDraw(toBar(Math.min(1, vsl.currentTime / vsl.duration))); }
+  function vslTick(){ vslUpdate(); if (!vsl.paused) requestAnimationFrame(vslTick); }
+  function vslSetSound(on){
+    vsl.muted = !on;
+    vslSnd.setAttribute("aria-pressed", String(on));
+    vslSnd.setAttribute("aria-label", on ? "Silenciar" : "Activar sonido");
+    if (on) vids.forEach((o) => setSound(o, false));
+  }
+  function vslStart(){
+    vslStarted = true;
+    vsl.loop = false;
+    vslSlot.classList.add("vsl-on");
+    vslSetSound(true);
+    vsl.currentTime = 0;
+    vsl.play().catch(() => {});
+  }
+  vsl.addEventListener("click", () => {
+    if (!vslStarted) return vslStart();
+    if (vsl.paused) { vslUserPaused = false; vsl.play().catch(() => {}); }
+    else { vslUserPaused = true; vsl.pause(); }
+  });
+  vslSnd.addEventListener("click", () => { if (!vslStarted) vslStart(); else vslSetSound(vsl.muted); });
+  vsl.addEventListener("play", () => { vslSlot.classList.remove("vsl-paused"); requestAnimationFrame(vslTick); });
+  vsl.addEventListener("pause", () => vslSlot.classList.add("vsl-paused"));
+  vsl.addEventListener("timeupdate", vslUpdate);
+  vsl.addEventListener("seeked", vslUpdate);
+  const vslPoint = (e) => { const r = vslBar.getBoundingClientRect(); return Math.max(0, Math.min(0.999, (e.clientX - r.left) / r.width)); };
+  vslBar.addEventListener("pointerdown", (e) => { vslDragging = true; vslBar.setPointerCapture(e.pointerId); vslDraw(vslPoint(e)); });
+  vslBar.addEventListener("pointermove", (e) => { if (vslDragging) vslDraw(vslPoint(e)); });
+  const vslDrop = (e) => { if (!vslDragging) return; vslDragging = false; vsl.currentTime = toVideo(vslPoint(e)) * vsl.duration; };
+  vslBar.addEventListener("pointerup", vslDrop);
+  vslBar.addEventListener("pointercancel", () => { vslDragging = false; });
+  vslBar.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") vsl.currentTime = Math.min(vsl.duration, vsl.currentTime + 5);
+    if (e.key === "ArrowLeft") vsl.currentTime = Math.max(0, vsl.currentTime - 5);
+  });
+  // Al salir de pantalla se pausa y al volver sigue donde iba, salvo que la persona lo haya pausado o ya haya terminado
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) { if (!vsl.paused) vsl.pause(); return; }
+      if (vslUserPaused || vsl.ended) return;
+      if (vslStarted || !reduce) vsl.play().catch(() => {});
+    }, { threshold: 0.6 }).observe(vsl);
   }
 
   // Resultados: los videos se reproducen en silencio al entrar en pantalla
