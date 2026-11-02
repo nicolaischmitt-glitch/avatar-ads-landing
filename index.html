@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Avatar Ads 1.0</title>
-<meta name="description" content="Crea anuncios con IA que venden. Hiperrealistas, en volumen y 13 veces más baratos. Taller en vivo el domingo 1 de noviembre + Sistema Avatar Ads de por vida · $27, pago único.">
+<meta name="description" content="El sistema para crear anuncios con IA que escalan tus ventas. 13 veces más económicos que otras herramientas, sin conocimientos técnicos y listos en minutos.">
 <script>document.documentElement.classList.add("js")</script>
 <!-- Meta Pixel (el mismo pixel está configurado en Hotmart con la API de conversiones) -->
 <script>
@@ -71,12 +71,7 @@ fbq('track', 'PageView');
   .btn:focus-visible{outline:2px solid var(--white);outline-offset:3px}
   .btn svg{flex:none}
 
-  /* ===== Franja superior (fecha del taller) + logo dentro del hero ===== */
-  .topbar{background:#000;border-bottom:1px solid var(--line-soft);padding:8px var(--gutter);text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;color:var(--text-2)}
-  .topbar i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--neon);box-shadow:0 0 8px var(--neon);margin-right:7px;vertical-align:1px}
-  .topbar b{color:var(--white);font-weight:500}
-  .hero .countdown{max-width:340px;margin:0 auto}
-  .hero-cd{margin:8px 0 22px}
+  /* ===== Logo dentro del hero ===== */
   .nav{display:flex;align-items:center;justify-content:center;padding:14px var(--gutter);max-width:640px;margin:0 auto}
   .logo img{display:block;height:44px;width:auto;mix-blend-mode:screen}
 
@@ -87,7 +82,6 @@ fbq('track', 'PageView');
       linear-gradient(rgba(48,94,74,.14) 1px, transparent 1px) 0 0/100% 44px;
     background-color:var(--bg)}
   .hero h1{font-size:clamp(31px,8.6vw,54px);line-height:1.05;margin:6px 0 16px}
-  .hero h1 .h1-2{display:block;font-size:.66em;line-height:1.12;margin-top:10px;font-stretch:108%}
   .hero p.sub{font-size:17.5px;color:var(--text-2);margin-bottom:26px}
   .hero p.sub b{color:var(--white);font-weight:600}
 
@@ -187,9 +181,6 @@ fbq('track', 'PageView');
   .stack-list .ok{flex:none;margin-top:2px;width:22px;height:22px;border-radius:50%;border:1px solid rgba(197,247,64,.5);background:var(--neon-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C5F740' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/12px no-repeat}
   .stack-sep{display:flex;align-items:center;gap:12px;padding:6px 18px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--neon)}
   .stack-sep::before,.stack-sep::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(197,247,64,.5),transparent)}
-  .stack-list.bonuses{padding:12px 14px 16px;display:grid;gap:10px}
-  .stack-list.bonuses > li{padding:14px;border:1px dashed rgba(197,247,64,.55);border-radius:14px;background:linear-gradient(160deg,rgba(197,247,64,.1),rgba(48,94,74,.15) 70%,transparent)}
-  .stack-list.bonuses > li:last-child{border-bottom:1px dashed rgba(197,247,64,.55)}
   .stack-list.future > li, .stack-list.future > li:last-child{border:1px dashed var(--line);background:rgba(48,94,74,.12)}
   .stack-list.future .tag{background:transparent;color:var(--neon);border:1px solid rgba(197,247,64,.55)}
   .stack-list .tag{flex:none;margin-top:1px;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;background:var(--neon);color:var(--bg);padding:4px 7px;border-radius:6px}
@@ -198,30 +189,21 @@ fbq('track', 'PageView');
   /* ===== Precio ===== */
   .price{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:72px;color:var(--white);letter-spacing:-.04em;line-height:1}
   .price small{font-family:var(--body);font-size:16px;letter-spacing:0;font-weight:500;color:var(--meta);margin-left:8px}
-  .info{list-style:none;margin:18px 0 22px;border-top:1px solid var(--line-soft)}
-  .info li{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--line-soft);font-size:14.5px}
-  .info li span{color:var(--meta)}
-  .info li b{text-align:right;font-weight:600;color:var(--white)}
-  .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:18px}
-  .countdown div{background:var(--bg-2);border:1px solid var(--line-soft);border-radius:10px;padding:8px 0;text-align:center}
-  .countdown b{display:block;font-family:var(--display);font-weight:800;font-size:22px;color:var(--white);font-variant-numeric:tabular-nums}
-  .countdown span{font-family:var(--mono);font-size:10px;text-transform:uppercase;color:var(--meta)}
-  .cd-label{text-align:center;font-size:12.5px;color:var(--meta);margin-top:8px}
-  .hero-date{margin-top:12px;text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2)}
-  .hero-date i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--neon);box-shadow:0 0 10px var(--neon);margin-right:8px;vertical-align:1px}
+  .stack-total .btn{margin-top:18px}
 
-  /* ===== Línea de tiempo del taller ===== */
-  .tl{list-style:none;position:relative;margin-top:24px;display:grid;gap:12px}
-  .tl::before{content:"";position:absolute;left:15px;top:18px;bottom:18px;width:2px;background:linear-gradient(var(--neon),var(--line))}
-  .tl li{position:relative;display:flex;gap:16px;align-items:flex-start}
-  .tl .dot{flex:none;position:relative;z-index:1;width:32px;height:32px;border-radius:50%;border:1px solid rgba(197,247,64,.55);background:var(--bg);display:grid;place-items:center;font-family:var(--mono);font-size:11px;color:var(--neon)}
-  .tl li.live .dot{background:var(--neon);color:var(--bg);box-shadow:0 0 18px rgba(197,247,64,.6)}
-  .tl .card{flex:1;border:1px solid var(--line-soft);background:var(--bg-2);border-radius:14px;padding:12px 14px}
-  .tl li.live .card{border-color:rgba(197,247,64,.55)}
-  .tl .when{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--neon)}
-  .tl b{display:block;font-family:var(--display);font-stretch:106%;font-weight:700;font-size:17px;color:var(--white);margin:3px 0 2px}
-  .tl .card span:last-child{font-size:14.5px;color:var(--text-2)}
-  #taller .countdown{margin-top:22px}
+  /* ===== Variaciones y estáticos ===== */
+  .pair-name{margin-top:28px;font-family:var(--display);font-stretch:108%;font-weight:700;font-size:18px;color:var(--white)}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+  .pair figcaption{margin-top:8px;font-size:13px;color:var(--meta)}
+  .pair .snd{padding:8px 10px}
+  .pair .snd .txt{display:none}
+  .from-video{width:150px;margin:26px auto 0;text-align:center}
+  .from-video img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line)}
+  .from-video figcaption{margin-top:8px;font-size:13px;color:var(--meta)}
+  .from-arrow{display:block;margin:10px auto 0;color:var(--neon)}
+  .rail.stills{margin-top:10px}
+  .stills .zoom{display:block;cursor:zoom-in}
+  .stills img{display:block;width:100%;height:auto;border-radius:12px}
 
   /* ===== WhatsApp: hablar con el creador ===== */
   .wa-line{margin-top:16px;text-align:center;font-size:14px;color:var(--text-2)}
@@ -341,8 +323,6 @@ fbq('track', 'PageView');
   .more ul{list-style:none;display:grid;gap:6px;margin-top:10px}
   .more li{position:relative;padding-left:14px;font-size:14px;color:var(--text-2)}
   .more li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--neon)}
-  .stack-list > li.day3{margin:6px 0;padding:14px;border:1.5px solid var(--neon);border-radius:14px;background:linear-gradient(160deg,rgba(197,247,64,.2),rgba(48,94,74,.25) 70%,transparent);box-shadow:0 0 30px -10px rgba(197,247,64,.55)}
-  .stack-list > li.day3:last-child{border-bottom:1.5px solid var(--neon)}
 
   /* ===== Visor de capturas ===== */
   .lightbox{border:0;padding:0;background:transparent;max-width:min(560px,94vw);max-height:92vh;margin:auto}
@@ -372,7 +352,6 @@ fbq('track', 'PageView');
   .sticky.show{transform:none}
   .sticky .in{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:14px}
   .sticky .p{flex:1;min-width:0;font-size:12px;color:var(--meta);line-height:1.25}
-  .sticky .p .cd-text{color:var(--neon);font-family:var(--mono);font-size:11px}
   .sticky .p b{display:block;font-family:var(--display);font-stretch:110%;font-weight:800;color:var(--white);font-size:19px;letter-spacing:-.03em;white-space:nowrap}
   .sticky .btn{width:auto;flex:none;white-space:nowrap;padding:14px 20px;font-size:16px;justify-content:center}
 
@@ -414,8 +393,6 @@ fbq('track', 'PageView');
 </head>
 <body>
 
-<div class="topbar"><i></i><b>Taller en vivo</b> · <span data-dia="largo">mañana domingo</span> 10 a.m. (hora Ecu)</div>
-
 <!-- ============ HERO (el logo va dentro para compartir el fondo) ============ -->
 <header class="hero">
   <nav class="nav">
@@ -423,8 +400,8 @@ fbq('track', 'PageView');
   </nav>
   <div class="wrap">
     <div>
-      <h1>Crea anuncios con IA <span class="b">que venden.</span> <span class="h1-2">Hiperrealistas y <span class="b">13 veces más baratos.</span></span></h1>
-      <p class="sub">El sistema para crear decenas de anuncios, <b>encontrar tus ganadores y escalar</b> tu negocio o el de tus clientes.</p>
+      <h1>El sistema para crear anuncios con IA <span class="b">que escalan tus ventas.</span></h1>
+      <p class="sub">13 veces más económicos que otras herramientas, sin conocimientos técnicos y listos en minutos.</p>
 
       <!-- VIDEO 1 (principal): el anuncio de Avatar Ads 1.0 -->
       <figure class="hero-video">
@@ -441,15 +418,7 @@ fbq('track', 'PageView');
         </div>
       </figure>
 
-      <div class="countdown">
-        <div><b data-u="d">0</b><span>días</span></div>
-        <div><b data-u="h">00</b><span>horas</span></div>
-        <div><b data-u="m">00</b><span>min</span></div>
-        <div><b data-u="s">00</b><span>seg</span></div>
-      </div>
-      <p class="cd-label hero-cd">para el taller en vivo</p>
-
-      <a class="btn" href="#taller">Ver el taller
+      <a class="btn" href="#inscripcion">Ver todo lo que incluye
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
       </a>
     </div>
@@ -457,7 +426,7 @@ fbq('track', 'PageView');
 </header>
 
 <!-- ============ EJEMPLOS ============ -->
-<!-- Orden (30 oct 2026): sérum ALBA a cámara = Versión A (videos-landing/08) · sérum ALBA voz en off = Versión B (videos-landing/08) · dentista (videos-landing/06) · profesor de inglés (videos-landing/07) · reel de podcast (Contenido/reels/07-podcast-seedance-centavos) · labial (videos-landing/02-labial-auto). 27 oct 2026: se quitaron airpods y suplemento (no eran nuestros). -->
+<!-- Orden (2 nov 2026): dentista (videos-landing/06) · profesor de inglés (videos-landing/07) · reel de podcast (Contenido/reels/07-podcast-seedance-centavos) · labial (videos-landing/02-labial-auto). Los dos del sérum pasaron a #variaciones. -->
 <!-- Costos (28 oct 2026): "Con Avatar Ads" = créditos de Flow (Omni 1.1 720p: 4 s=7, 6 s=10, 8 s=12, 10 s=15) × ~$0,02 (plan de pago Google AI Pro: ~$19,99 por 1.000 créditos); con el plan gratuito, $0 (letra pequeña: "O $0 siguiendo una de las metodologías del sistema"). Promesa (28 oct 2026): "13 veces más baratos" = ~$13 vs ~$1 por anuncio de 30 s (~50 créditos), la misma proporción en los 6 ejemplos. "Otras herramientas" = segundos generados × ~$0,43/s (promedio de la sección de costos: ~$13 por 30 s). Sin contar repeticiones. -->
 <section class="alt" id="ejemplos">
   <div class="wrap">
@@ -465,30 +434,6 @@ fbq('track', 'PageView');
     <p class="muted">Todos hechos con IA, para productos, servicios y marcas. Úsalo en tu negocio o véndelo como servicio.</p>
 
     <div class="rail">
-      <figure>
-        <div class="video-slot"><video src="videos/ejemplo-serum.mp4" poster="videos/ejemplo-serum.jpg" playsinline muted loop preload="none" aria-label="Ejemplo, versión A: anuncio de un sérum con una avatar de IA hablando a cámara"></video>
-          <span class="num">Versión A</span>
-          <button type="button" class="snd" aria-pressed="false" aria-label="Activar sonido">
-            <svg class="off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
-            <svg class="on" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a10 10 0 010 14"/></svg>
-            <span class="txt">Activar sonido</span>
-          </button>
-        </div>
-        <figcaption><b>Producto · avatar hablando</b><span class="muted">Sérum · avatar a cámara + B-rolls</span></figcaption>
-        <div class="cost"><div class="cost-row us"><span>Con Avatar Ads</span><b>~$2,88</b></div><div class="cost-row them"><span>Con otras herramientas</span><b>~$38</b></div><small>O $0 siguiendo una de las metodologías del sistema</small></div>
-      </figure>
-      <figure>
-        <div class="video-slot"><video src="videos/ejemplo-serum-voz.mp4?v=2" poster="videos/ejemplo-serum-voz.jpg?v=2" playsinline muted loop preload="none" aria-label="Ejemplo, versión B: el mismo anuncio del sérum con voz en off y B-rolls"></video>
-          <span class="num">Versión B</span>
-          <button type="button" class="snd" aria-pressed="false" aria-label="Activar sonido">
-            <svg class="off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
-            <svg class="on" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a10 10 0 010 14"/></svg>
-            <span class="txt">Activar sonido</span>
-          </button>
-        </div>
-        <figcaption><b>Producto · voice over</b><span class="muted">El mismo sérum, solo voz en off + B-rolls</span></figcaption>
-        <div class="cost"><div class="cost-row us"><span>Con Avatar Ads</span><b>~$1,60</b></div><div class="cost-row them"><span>Con otras herramientas</span><b>~$21</b></div><small>O $0 siguiendo una de las metodologías del sistema</small></div>
-      </figure>
       <figure>
         <div class="video-slot"><video src="videos/ejemplo-dental.mp4" poster="videos/ejemplo-dental.jpg" playsinline muted loop preload="none" aria-label="Ejemplo: anuncio de una clínica dental hecho con IA"></video>
           <button type="button" class="snd" aria-pressed="false" aria-label="Activar sonido">
@@ -533,6 +478,82 @@ fbq('track', 'PageView');
         <figcaption><b>Anuncio UGC</b><span class="muted">Habla, se mueve y presenta el producto</span></figcaption>
         <div class="cost"><div class="cost-row us"><span>Con Avatar Ads</span><b>~$1,10</b></div><div class="cost-row them"><span>Con otras herramientas</span><b>~$15</b></div><small>O $0 siguiendo una de las metodologías del sistema</small></div>
       </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VARIACIONES (2 nov 2026): sérum ALBA (videos-landing/08) y café CUMBRE (videos-landing/16) ============ -->
+<section id="variaciones">
+  <div class="wrap">
+    <h2>De un solo anuncio, <span class="b">decenas de variaciones para testear.</span></h2>
+    <p class="muted">Cambia el hook, el personaje, el guion o el formato, y deja que los datos te digan cuál gana.</p>
+    <h3 class="pair-name">Sérum ALBA</h3>
+    <div class="pair">
+      <figure>
+        <div class="video-slot"><video src="videos/ejemplo-serum.mp4" poster="videos/ejemplo-serum.jpg" playsinline muted loop preload="none" aria-label="Versión A: anuncio de un sérum con una avatar de IA hablando a cámara"></video>
+          <span class="num">Versión A</span>
+          <button type="button" class="snd" aria-pressed="false" aria-label="Activar sonido">
+            <svg class="off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
+            <svg class="on" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a10 10 0 010 14"/></svg>
+            <span class="txt">Activar sonido</span>
+          </button>
+        </div>
+        <figcaption>Avatar a cámara + B-rolls</figcaption>
+      </figure>
+      <figure>
+        <div class="video-slot"><video src="videos/ejemplo-serum-voz.mp4?v=2" poster="videos/ejemplo-serum-voz.jpg?v=2" playsinline muted loop preload="none" aria-label="Versión B: el mismo anuncio del sérum con voz en off y B-rolls"></video>
+          <span class="num">Versión B</span>
+          <button type="button" class="snd" aria-pressed="false" aria-label="Activar sonido">
+            <svg class="off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
+            <svg class="on" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a10 10 0 010 14"/></svg>
+            <span class="txt">Activar sonido</span>
+          </button>
+        </div>
+        <figcaption>Voz en off + B-rolls</figcaption>
+      </figure>
+    </div>
+    <h3 class="pair-name">Café CUMBRE</h3>
+    <div class="pair">
+      <figure>
+        <div class="video-slot"><video src="videos/ejemplo-cumbre-a.mp4" poster="videos/ejemplo-cumbre-a.jpg" playsinline muted loop preload="none" aria-label="Versión A: anuncio de café con un avatar de IA hablando a cámara"></video>
+          <span class="num">Versión A</span>
+          <button type="button" class="snd" aria-pressed="false" aria-label="Activar sonido">
+            <svg class="off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
+            <svg class="on" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a10 10 0 010 14"/></svg>
+            <span class="txt">Activar sonido</span>
+          </button>
+        </div>
+        <figcaption>Avatar a cámara + B-rolls</figcaption>
+      </figure>
+      <figure>
+        <div class="video-slot"><video src="videos/ejemplo-cumbre-b.mp4" poster="videos/ejemplo-cumbre-b.jpg" playsinline muted loop preload="none" aria-label="Versión B: el mismo anuncio del café, con escenas de un día y voz en off"></video>
+          <span class="num">Versión B</span>
+          <button type="button" class="snd" aria-pressed="false" aria-label="Activar sonido">
+            <svg class="off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
+            <svg class="on" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a10 10 0 010 14"/></svg>
+            <span class="txt">Activar sonido</span>
+          </button>
+        </div>
+        <figcaption>Un día en su vida + voz en off</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ESTÁTICOS (2 nov 2026): imágenes en videos-landing/16-ejemplo-producto-cumbre/estaticos/ ============ -->
+<section class="alt" id="estaticos">
+  <div class="wrap">
+    <h2>Tu video también <span class="b">se convierte en anuncios de imagen.</span></h2>
+    <p class="muted">El sistema toma el ángulo, el guion y las imágenes de tu video, y crea anuncios estáticos para feed e historias.</p>
+    <figure class="from-video">
+      <img src="videos/ejemplo-cumbre-a.jpg" alt="Primer cuadro del anuncio en video de café CUMBRE" width="720" height="1280" loading="lazy">
+      <figcaption>Tu anuncio en video</figcaption>
+    </figure>
+    <svg class="from-arrow" width="28" height="36" viewBox="0 0 24 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v25M5 21l7 7 7-7"/></svg>
+    <div class="rail stills">
+      <figure><a class="zoom" href="estaticos/cumbre-hook.webp"><img src="estaticos/cumbre-hook.webp" alt="Anuncio estático: Si te levantas a las 5, no lo empieces con un café cualquiera" width="720" height="900" loading="lazy"></a></figure>
+      <figure><a class="zoom" href="estaticos/cumbre-comparacion.webp"><img src="estaticos/cumbre-comparacion.webp" alt="Anuncio estático: comparación entre café instantáneo y CUMBRE" width="720" height="900" loading="lazy"></a></figure>
+      <figure><a class="zoom" href="estaticos/cumbre-ritual.webp"><img src="estaticos/cumbre-ritual.webp" alt="Anuncio estático: Tu ritual antes de que empiece todo" width="720" height="900" loading="lazy"></a></figure>
     </div>
   </div>
 </section>
@@ -693,98 +714,27 @@ fbq('track', 'PageView');
   </div>
 </section>
 
-<!-- ============ EL TALLER EN VIVO (28 oct 2026: el taller es la oferta principal; la versión "sistema" está guardada en landing-versiones/sistema-curso/) ============ -->
-<section id="taller">
-  <div class="wrap narrow">
-    <h2><span data-dia="largo" data-cap>Mañana domingo</span> lo creamos <span class="b">en vivo.</span></h2>
-    <p class="muted">Me ves crear un anuncio completo con el sistema, de la idea al video editado, y resuelves tus dudas en vivo. Después, te quedas con todo.</p>
-    <ol class="tl">
-      <li class="live"><span class="dot">01</span><div class="card"><span class="when">Dom 1 nov · 10:00 a.m. (Ecuador)</span><b>Taller en vivo</b><span>Creamos un anuncio completo para un producto, de la idea al video editado.</span></div></li>
-      <li class="live"><span class="dot">02</span><div class="card"><span class="when">Lun 2 nov · 7:00 p.m. (Ecuador)</span><b>Clase bonus en vivo</b><span>Cómo conseguir clientes para vender estos anuncios.</span></div></li>
-      <li><span class="dot">03</span><div class="card"><span class="when">Después</span><b>Te quedas con todo</b><span>El Sistema Avatar Ads de por vida, la grabación del taller y el grupo de soporte.</span></div></li>
-    </ol>
-    <div class="countdown">
-          <div><b data-u="d">0</b><span>días</span></div>
-          <div><b data-u="h">00</b><span>horas</span></div>
-          <div><b data-u="m">00</b><span>min</span></div>
-          <div><b data-u="s">00</b><span>seg</span></div>
-        </div>
-    <p class="cd-label">para el inicio del taller en vivo</p>
-  </div>
-</section>
-
-<!-- ============ LA OFERTA (el taller + lo que te llevas por participar + precio + CTA) ============ -->
+<!-- ============ LA OFERTA (sistema + curso + soporte + precio + CTA) ============ -->
 <section class="alt" id="inscripcion">
   <div class="wrap narrow">
     <h2>Por $27, <span class="b">esto es todo lo que obtienes.</span></h2>
-    <p class="muted">Entras al <b class="hl">taller</b> del domingo 1 (10 a.m.) y a la clase bonus del lunes 2 (7 p.m.), hora de Ecuador. Y te quedas con el <b class="hl">Sistema Avatar Ads</b> para siempre.</p>
+    <p class="muted">Te llevas el <b class="hl">Sistema Avatar Ads</b> para siempre, el curso para implementarlo paso a paso y soporte cuando lo necesites.</p>
 
     <div class="stack">
-      <div class="stack-head"><span>Avatar Ads 1.0</span><span>En vivo · 1–2 nov</span></div>
+      <div class="stack-head"><span>Avatar Ads 1.0</span><span>Acceso de por vida</span></div>
 
       <ul class="stack-list">
-        <li class="main"><span class="ok"></span><div>
-          <b>Taller en vivo · Domingo 1: aprende a usar el sistema <s>Valor $97</s></b>
-          <span>Un día intenso para que veas cómo se usa y por qué es tan potente: creamos en vivo un anuncio completo para un producto, desde la idea hasta el video editado.</span>
-          <details class="more"><summary>Ver lo que veremos</summary>
-            <ul>
-              <li>Setup: herramientas necesarias y alternativas económicas.</li>
-              <li>Ángulos publicitarios y formatos de anuncios con IA.</li>
-              <li>Desarrollo del script: hook, desarrollo y CTA.</li>
-              <li>Creación del storyboard del anuncio.</li>
-              <li>Creación del personaje y generación de imágenes con IA, con consistencia entre escenas.</li>
-              <li>Prompts de video: acciones, gesticulación, expresiones y voz.</li>
-              <li>Generación de clips, corrección de errores y gestión de créditos.</li>
-              <li>Edición automatizada: ritmo, subtítulos, textos, producto y CTA.</li>
-              <li>Exportación del anuncio terminado.</li>
-            </ul>
-          </details>
-        </div></li>
-        <li class="day3"><span class="tag">Bono</span><div>
-          <b>Clase bonus en vivo · Lunes 2: cómo conseguir clientes <s>Valor $67</s></b>
-          <span>Mi proceso para vender estos anuncios a negocios.</span>
-          <details class="more"><summary>Ver lo que veremos</summary>
-            <ul>
-              <li>Qué oferta vender.</li>
-              <li>El proceso para captar clientes de manera orgánica.</li>
-              <li>Cómo captar clientes con anuncios para ofrecer este servicio.</li>
-            </ul>
-          </details>
-        </div></li>
-      </ul>
-
-      <div class="stack-sep"><span>Lo que te llevas por participar</span></div>
-      <ul class="stack-list">
-        <li class="main"><span class="ok"></span><div><b>Sistema Avatar Ads + todas sus futuras actualizaciones <s>Valor $497</s></b><span>Tu máquina de anuncios: el sistema que usamos para crear anuncios, de la idea al video editado. Es tuyo para siempre, con guía de instalación paso a paso y cada mejora que le hagamos, sin pagar más.</span></div></li>
-        <li><span class="ok"></span><div><b>Curso Avatar Ads <s>Valor $197</s></b><span>El curso completo para implementar el sistema paso a paso, a tu ritmo. Te lo enviamos a tu correo, sin pagar nada más.</span></div></li>
-        <li><span class="ok"></span><div><b>Prompts <s>Valor $47</s></b><span>Prompts y workflows listos para adaptar a tus anuncios.</span></div></li>
-      </ul>
-
-      <div class="stack-sep"><span>+ Bonos</span></div>
-      <ul class="stack-list bonuses">
-        <li><span class="tag">Bono</span><div><b>Grupo privado de soporte <s>Valor $97</s></b><span>Feedback de tus ads, ideas y los mejores sistemas que vayamos encontrando, porque la IA evoluciona cada semana.</span></div></li>
-        <li><span class="tag">Bono</span><div><b>Grabación completa del taller <s>Valor $47</s></b><span>Repite cualquier clase cuando quieras.</span></div></li>
+        <li class="main"><span class="ok"></span><div><b>Sistema Avatar Ads + todas sus futuras actualizaciones <s>Valor $497</s></b><span>Tu máquina de anuncios: el sistema que usamos para crear anuncios, de la idea al video editado. Es tuyo para siempre, con guía de instalación paso a paso y cada mejora que le hagamos, sin pagar más. Incluye todos los skills del sistema, los mismos que usamos para crear nuestros anuncios.</span></div></li>
+        <li><span class="ok"></span><div><b>Curso Avatar Ads <s>Valor $197</s></b><span>Aprende a implementar el sistema paso a paso, a tu ritmo.</span></div></li>
+        <li><span class="ok"></span><div><b>Soporte <s>Valor $97</s></b><span>Feedback de tus anuncios y ayuda si te trabas en el sistema.</span></div></li>
       </ul>
 
       <div class="stack-total">
         <div class="price">$27<small>pago único</small></div>
-        <ul class="info">
-          <li><span>Taller en vivo</span><b>Dom 1 nov · 10:00 a.m.</b></li>
-          <li><span>Bono en vivo</span><b>Lun 2 nov · 7:00 p.m.</b></li>
-          <li><span>Horario</span><b>Hora de Ecuador</b></li>
-          <li><span>Modalidad</span><b>Online, en vivo</b></li>
-        </ul>
-        <a class="btn" href="https://pay.hotmart.com/G108061829I?checkoutMode=10">Quiero entrar al taller · $27
+        <a class="btn" href="https://pay.hotmart.com/G108061829I?checkoutMode=10">Quiero el sistema · $27
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg>
         </a>
-        <div class="countdown">
-          <div><b data-u="d">0</b><span>días</span></div>
-          <div><b data-u="h">00</b><span>horas</span></div>
-          <div><b data-u="m">00</b><span>min</span></div>
-          <div><b data-u="s">00</b><span>seg</span></div>
-        </div>
-        <p class="cd-label">para el inicio del taller en vivo</p>
-        <p class="wa-line">¿Tienes dudas antes de entrar? <a class="wa-link" href="https://wa.me/593990763150?text=Hola%20Nicolai%2C%20tengo%20una%20duda%20sobre%20el%20taller%20de%20Avatar%20Ads" target="_blank" rel="noopener">Escríbeme por WhatsApp</a></p>
+        <p class="wa-line">¿Tienes dudas antes de entrar? <a class="wa-link" href="https://wa.me/593990763150?text=Hola%20Nicolai%2C%20tengo%20una%20duda%20sobre%20Avatar%20Ads" target="_blank" rel="noopener">Escríbeme por WhatsApp</a></p>
       </div>
     </div>
   </div>
@@ -795,14 +745,14 @@ fbq('track', 'PageView');
   <div class="wrap narrow">
     <h2>Preguntas frecuentes.</h2>
     <div class="faq">
-      <details><summary>¿Qué estoy comprando exactamente?</summary><p>Tu lugar en el taller en vivo del domingo 1 de noviembre y en la clase bonus del lunes 2 de noviembre. Por participar, te llevas el Sistema Avatar Ads, tuyo para siempre y con todas sus futuras actualizaciones: el mismo con el que creamos en vivo un anuncio completo.</p></details>
-      <details><summary>¿Por qué es en vivo?</summary><p>Porque es la apertura de Avatar Ads 1.0. Esta primera edición se da en vivo para mostrar el proceso en tiempo real y resolver dudas.</p></details>
-      <details><summary>¿Y si no puedo conectarme a una clase?</summary><p>Tendrás la grabación completa del taller y el Sistema Avatar Ads de por vida, con todas sus actualizaciones.</p></details>
-      <details><summary>¿Qué pasa cuando incremente el precio?</summary><p>El precio de Avatar Ads incrementará en las próximas ediciones. Si entras en la apertura, nada cambia para ti: mantienes tu acceso de por vida y recibes todas las futuras actualizaciones sin pagar más.</p></details>
-      <details><summary>¿Necesito saber de copywriting o de anuncios?</summary><p>No. El Sistema Avatar Ads te guía con preguntas para definir el ángulo, el guion y el llamado a la acción de cada anuncio. En el taller lo ves en vivo, de la idea al anuncio editado.</p></details>
-      <details><summary>¿Qué necesito para usar el sistema?</summary><p>Una computadora (Windows o Mac), una cuenta de Claude con un plan que incluya Claude Code (el plan Pro cuesta unos $20 al mes) y una cuenta de Google con acceso a Google Flow para generar los videos. En el taller te muestro cómo dejarlo todo listo.</p></details>
+      <details><summary>¿Qué estoy comprando exactamente?</summary><p>El Sistema Avatar Ads, tuyo para siempre y con todas sus futuras actualizaciones, el curso para implementarlo y el soporte.</p></details>
+      <details><summary>¿Me entregan los skills?</summary><p>Sí. Te llevas todos los skills del sistema, los mismos que usamos para crear nuestros anuncios, listos para usar en Claude Code, con todas sus futuras actualizaciones.</p></details>
+      <details><summary>¿Cuánto tardo en crear un anuncio?</summary><p>Una vez instalado el sistema, puedes crear un anuncio en unos 30 minutos. El tiempo exacto depende de tu computadora.</p></details>
+      <details><summary>¿Qué pasa cuando incremente el precio?</summary><p>Si el precio sube más adelante, nada cambia para ti: mantienes tu acceso de por vida y recibes todas las actualizaciones sin pagar más.</p></details>
+      <details><summary>¿Necesito saber de copywriting o de anuncios?</summary><p>No. El Sistema Avatar Ads te guía con preguntas para definir el ángulo, el guion y el llamado a la acción de cada anuncio.</p></details>
+      <details><summary>¿Qué necesito para usar el sistema?</summary><p>Una computadora (Windows o Mac), una cuenta de Claude con un plan que incluya Claude Code (el plan Pro cuesta unos $20 al mes) y una cuenta de Google con acceso a Google Flow para generar los videos. La guía de instalación te muestra cómo dejarlo todo listo.</p></details>
       <details><summary>¿Necesito herramientas costosas?</summary><p>No. Te enseño un sistema económico con alternativas de bajo costo: cada anuncio te sale unas 13 veces más barato que en otras herramientas, y puedes empezar con el plan gratuito.</p></details>
-      <details><summary>¿Puedo vender este servicio?</summary><p>Sí. En la clase bonus del lunes 2 de noviembre te enseño qué oferta vender y cómo captar clientes de manera orgánica y con anuncios.</p></details>
+      <details><summary>¿Puedo vender este servicio?</summary><p>Sí. Puedes usar el sistema para crear anuncios para tu negocio o para tus clientes.</p></details>
     </div>
   </div>
 </section>
@@ -814,7 +764,7 @@ fbq('track', 'PageView');
       <img src="nicolai.webp" alt="Nicolai, creador de Avatar Ads" width="240" height="240" loading="lazy">
       <h2>¿Te quedó alguna duda? <span class="b">Escríbeme.</span></h2>
       <p>Sin bots ni asistentes: me escribes a mí, Nicolai, el creador de Avatar Ads, y te respondo personalmente.</p>
-      <a class="btn-ghost wa-link" href="https://wa.me/593990763150?text=Hola%20Nicolai%2C%20tengo%20una%20duda%20sobre%20el%20taller%20de%20Avatar%20Ads" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.6z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.8-1.8l.8-1-1-2z"/></svg>Hablar con Nicolai por WhatsApp</a>
+      <a class="btn-ghost wa-link" href="https://wa.me/593990763150?text=Hola%20Nicolai%2C%20tengo%20una%20duda%20sobre%20Avatar%20Ads" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.6z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.8-1.8l.8-1-1-2z"/></svg>Hablar con Nicolai por WhatsApp</a>
     </div>
   </div>
 </section>
@@ -823,16 +773,9 @@ fbq('track', 'PageView');
 <section class="final">
   <div class="wrap narrow">
     <img class="final-logo" src="logo-avatar-ads.webp" alt="" width="900" height="330" loading="lazy">
-    <h2>Nos vemos <span data-dia="corto">mañana</span>, <span class="b">en vivo.</span></h2>
-    <p class="muted">Domingo 1 de noviembre, 10 a.m. (Ecuador). Te llevas el sistema para crear anuncios que venden, 13 veces más baratos.</p>
-    <div class="countdown">
-          <div><b data-u="d">0</b><span>días</span></div>
-          <div><b data-u="h">00</b><span>horas</span></div>
-          <div><b data-u="m">00</b><span>min</span></div>
-          <div><b data-u="s">00</b><span>seg</span></div>
-        </div>
-    <p class="cd-label" style="margin-bottom:22px">para el inicio del taller en vivo</p>
-    <a class="btn" href="https://pay.hotmart.com/G108061829I?checkoutMode=10">Quiero entrar al taller · $27
+    <h2>Entra hoy. <span class="b">Quédate para siempre.</span></h2>
+    <p class="muted" style="margin-bottom:22px">Crea anuncios con IA que escalan tus ventas, 13 veces más económicos y sin conocimientos técnicos.</p>
+    <a class="btn" href="https://pay.hotmart.com/G108061829I?checkoutMode=10">Quiero el sistema · $27
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg>
     </a>
   </div>
@@ -842,8 +785,8 @@ fbq('track', 'PageView');
 <!-- Barra fija (solo móvil) -->
 <div class="sticky" id="sticky">
   <div class="in">
-    <div class="p"><b>Taller en vivo</b><span data-dia="largo">mañana domingo</span> · <span class="cd-text">10 a.m.</span></div>
-    <a class="btn" href="#taller">Ver el taller</a>
+    <div class="p"><b>Avatar Ads</b>tu máquina de anuncios</div>
+    <a class="btn" href="#inscripcion">Conoce el sistema</a>
   </div>
 </div>
 
@@ -854,36 +797,6 @@ fbq('track', 'PageView');
 </dialog>
 
 <script>
-  // "Mañana" / "hoy" según la fecha en Ecuador (el HTML trae "mañana" por si no corre el script)
-  (() => {
-    const dia = (d) => d.toLocaleDateString("en-CA", { timeZone: "America/Guayaquil" });
-    const diff = Math.round((Date.parse(dia(new Date("2026-11-01T10:00:00-05:00"))) - Date.parse(dia(new Date()))) / 864e5);
-    const txt = diff === 0 ? { largo: "hoy domingo", corto: "hoy" } : diff === 1 ? { largo: "mañana domingo", corto: "mañana" } : { largo: "este domingo", corto: "el domingo" };
-    document.querySelectorAll("[data-dia]").forEach((e) => {
-      const t = txt[e.dataset.dia];
-      e.textContent = e.hasAttribute("data-cap") ? t[0].toUpperCase() + t.slice(1) : t;
-    });
-  })();
-
-  // Cuenta regresiva al inicio del taller
-  const target = new Date("2026-11-01T10:00:00-05:00").getTime();
-  const pad = n => String(n).padStart(2, "0");
-  const cdText = document.querySelector("[data-cd-text]");
-  function tick(){
-    let t = Math.max(0, Math.floor((target - Date.now()) / 1000));
-    const d = Math.floor(t / 86400); t %= 86400;
-    const h = Math.floor(t / 3600); t %= 3600;
-    const m = Math.floor(t / 60), sec = t % 60;
-    document.querySelectorAll(".countdown").forEach((c) => {
-      c.querySelector('[data-u="d"]').textContent = d;
-      c.querySelector('[data-u="h"]').textContent = pad(h);
-      c.querySelector('[data-u="m"]').textContent = pad(m);
-      c.querySelector('[data-u="s"]').textContent = pad(sec);
-    });
-    if (cdText) cdText.textContent = d + h + m + sec ? (d ? `faltan ${d} d` : `faltan ${h} h`) : "en vivo";
-  }
-  tick(); setInterval(tick, 1000);
-
   // Barra fija: aparece tras el hero, se oculta sobre la sección de precio
   const sticky = document.getElementById("sticky");
   const hero = document.querySelector(".hero");
