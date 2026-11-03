@@ -290,6 +290,8 @@ fbq('track', 'PageView');
   .race-result b{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:22px;color:var(--neon);margin-right:4px}
   .race .sp-note{margin:8px 0 0}
   .race .sp-tools{margin-top:12px}
+  .race-val{white-space:nowrap}
+  .race-val small{font-size:12.5px;color:var(--meta)}
   .race-logos{list-style:none;display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:10px}
   .race-logos li{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--text-2)}
   .race-logos img{display:block;width:24px;height:24px;border-radius:6px;background:#fff}
@@ -618,13 +620,13 @@ fbq('track', 'PageView');
 <section id="economico">
   <div class="wrap narrow">
     <h2>Calidad hiperrealista, <span class="b">13 veces más barata.</span></h2>
-    <p class="muted">Un anuncio de 30 s cuesta <b class="hl">~$13</b> en otras herramientas y <b class="hl">~$1</b> con el Sistema Avatar Ads. Con el mismo dinero, haces <b class="hl">~13</b>.</p>
+    <p class="muted">Un anuncio de 30 s cuesta <b class="hl">hasta ~$13</b> en otras herramientas y <b class="hl">~$1</b> con el Sistema Avatar Ads. Con el mismo dinero, haces <b class="hl">~13</b>.</p>
 
     <!-- Carrera de costo (30 oct 2026): las dos barras crecen a la misma velocidad ($ por segundo de animación); la verde se detiene en $1, la gris sigue hasta $13 -->
     <div class="race" id="spend">
       <p class="race-head">Costo de 1 anuncio de 30 segundos</p>
       <div class="race-row them" style="--w:100%;--t:3.2s">
-        <div class="race-top"><span class="race-name">Otras herramientas <small>(promedio)</small></span><b class="race-num" data-to="13">$13,00</b></div>
+        <div class="race-top"><span class="race-name">Otras herramientas</span><span class="race-val"><small>hasta</small> <b class="race-num" data-to="13">~$13</b></span></div>
         <div class="race-track"><i></i></div>
         <ul class="race-logos">
           <li><img src="competencia/logo-higgsfield.webp" alt="" width="24" height="24" loading="lazy">Higgsfield</li>
@@ -633,17 +635,11 @@ fbq('track', 'PageView');
         </ul>
       </div>
       <div class="race-row us" style="--w:7.7%;--t:.25s">
-        <div class="race-top"><span class="race-name">Sistema Avatar Ads</span><b class="race-num" data-to="1">$1,00</b></div>
+        <div class="race-top"><span class="race-name">Sistema Avatar Ads</span><b class="race-num" data-to="1">~$1</b></div>
         <div class="race-track"><i></i></div>
       </div>
-      <p class="race-result"><b>13×</b> más barato: con $13 haces ~13 anuncios en vez de 1.</p>
+      <p class="race-result"><b>Hasta 13×</b> más barato: con $13 haces ~13 anuncios en vez de 1.</p>
       <p class="sp-note">O $0 siguiendo una de las metodologías del sistema</p>
-      <ul class="sp-tools">
-        <li><span>Wan 2.5</span><b>~$3</b></li>
-        <li><span>Seedance 2.0 · API oficial</span><b>~$11</b></li>
-        <li><span>Seedance 2.5</span><b>~$17</b></li>
-        <li><span>Seedance 2.0 · fal.ai</span><b>~$20</b></li>
-      </ul>
     </div>
   </div>
 </section>
@@ -974,7 +970,7 @@ fbq('track', 'PageView');
       const step = (now) => {
         const el = Math.max(0, now - t0) / 1000;
         let done = true;
-        nums.forEach((n) => { const to = +n.dataset.to, v = Math.min(to, el * perSec); n.textContent = fmt(v); if (v < to) done = false; });
+        nums.forEach((n) => { const to = +n.dataset.to, v = Math.min(to, el * perSec); n.textContent = v < to ? fmt(v) : "~$" + to; if (v < to) done = false; });
         if (!done) requestAnimationFrame(step);
       };
       requestAnimationFrame(step);
