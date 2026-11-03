@@ -290,6 +290,9 @@ fbq('track', 'PageView');
   .race-result b{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:22px;color:var(--neon);margin-right:4px}
   .race .sp-note{margin:8px 0 0}
   .race .sp-tools{margin-top:12px}
+  .race-logos{list-style:none;display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:10px}
+  .race-logos li{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--text-2)}
+  .race-logos img{display:block;width:24px;height:24px;border-radius:6px;background:#fff}
 
   /* ===== Gráfico XY ===== */
   .xy{margin-top:24px;border:1px solid var(--line);border-radius:20px;background:radial-gradient(90% 70% at 80% 0%,rgba(48,94,74,.35),transparent 70%),var(--bg-2);padding:16px 12px 10px}
@@ -623,6 +626,11 @@ fbq('track', 'PageView');
       <div class="race-row them" style="--w:100%;--t:3.2s">
         <div class="race-top"><span class="race-name">Otras herramientas <small>(promedio)</small></span><b class="race-num" data-to="13">$13,00</b></div>
         <div class="race-track"><i></i></div>
+        <ul class="race-logos">
+          <li><img src="competencia/logo-higgsfield.webp" alt="" width="24" height="24" loading="lazy">Higgsfield</li>
+          <li><img src="competencia/logo-heygen.webp" alt="" width="24" height="24" loading="lazy">HeyGen</li>
+          <li><img src="competencia/logo-arcads.webp" alt="" width="24" height="24" loading="lazy">Arcads</li>
+        </ul>
       </div>
       <div class="race-row us" style="--w:7.7%;--t:.25s">
         <div class="race-top"><span class="race-name">Sistema Avatar Ads</span><b class="race-num" data-to="1">$1,00</b></div>
