@@ -1,5 +1,5 @@
 PLANTILLA PROMPT JSON — VIDEOS UGC HIPERREALISTAS (Google Flow)
-Avatar Ads 1.0 · https://taller.droilab.com
+Avatar Ads 1.0 · https://avatarads.droilab.com
 
 Cómo usarla: copia todo lo que está entre las llaves { }, pega tu imagen de referencia en Google Flow y pega este JSON como prompt.
 Cambia SOLO dos campos en cada clip:
