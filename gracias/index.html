@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>¡Ya estás dentro! · Avatar Ads 1.0</title>
 <!-- Página de gracias: Hotmart redirige aquí después de la compra. No se indexa ni se enlaza desde la landing. -->
-<!-- Versión temporal (3 nov 2026): el acceso se da a mano por WhatsApp mientras se construye el curso en Skool. -->
+<!-- El acceso al sistema y al curso llega por correo; esta página no lleva el link de Drive ni el de WhatsApp. -->
 <meta name="robots" content="noindex, nofollow">
 <!-- Meta Pixel: solo PageView. La compra (Purchase) la envía Hotmart con su pixel + API; no duplicarla aquí. -->
 <script>
@@ -51,13 +51,7 @@ fbq('track', 'PageView');
   h1{font-family:var(--display);font-stretch:112%;color:var(--white);letter-spacing:-.025em;line-height:1.04;font-weight:800;font-size:clamp(32px,9vw,44px);margin:22px 0 14px}
   h1 .b{color:var(--neon)}
   .lead{font-size:17px}
-
-  .btn{display:flex;text-decoration:none;align-items:center;justify-content:space-between;gap:12px;width:100%;background:var(--neon);color:var(--bg);font-family:var(--display);font-stretch:108%;font-weight:800;font-size:18px;text-align:left;padding:19px 22px;border-radius:14px;margin-top:28px;
-    box-shadow:0 0 0 1px rgba(197,247,64,.6), 0 14px 34px -14px rgba(197,247,64,.55);transition:transform .12s, filter .2s}
-  .btn:hover{filter:brightness(1.05)}
-  .btn:active{transform:translateY(2px)}
-  .btn:focus-visible{outline:2px solid var(--white);outline-offset:3px}
-  .btn svg{flex:none}
+  .lead strong{color:var(--white);font-weight:600}
   .note{font-size:14px;margin-top:14px;color:var(--meta)}
 </style>
 </head>
@@ -71,18 +65,10 @@ fbq('track', 'PageView');
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#C5F740" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
     </div>
     <h1>¡Ya estás dentro de <span class="b">Avatar Ads</span>!</h1>
-    <p class="lead">Escríbeme por WhatsApp para darte acceso.</p>
-    <a class="btn" href="https://wa.me/593990763150?text=Hola%20Nicolai%2C%20acab%C3%A9%20de%20ingresar%20al%20sistema%2C%20por%20favor%2C%20%C2%BFme%20puedes%20dar%20acceso%3F" target="_blank" rel="noopener" id="btn-whatsapp">
-      Pedir mi acceso por WhatsApp
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </a>
-    <p class="note">El mensaje ya va escrito: solo dale a enviar.</p>
+    <p class="lead"><strong>Revisa tu correo:</strong> te enviamos el acceso al sistema y al curso.</p>
+    <p class="note">Búscalo en el correo con el que compraste. Si no lo ves, revisa spam o promociones.</p>
   </section>
 </main>
 
-<script>
-  // Evento propio para medir cuántos compradores piden acceso (no es una compra)
-  document.getElementById("btn-whatsapp").addEventListener("click", () => { if (window.fbq) fbq("trackCustom", "ClicAccesoWhatsApp"); });
-</script>
 </body>
 </html>
