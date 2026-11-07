@@ -59,6 +59,11 @@ fbq('track', 'PageView');
   label{display:block;text-align:left;font-size:13px;color:var(--meta);margin:0 0 5px}
   input{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:12px;color:var(--white);font:inherit;font-size:16px;padding:14px;margin-bottom:14px}
   input:focus{outline:2px solid var(--neon);outline-offset:1px}
+  .tel{display:flex;gap:8px;margin-bottom:14px}
+  .tel input{margin-bottom:0;flex:1;min-width:0}
+  select{flex:0 0 50%;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:12px;color:var(--white);font:inherit;font-size:15px;padding:14px 4px 14px 10px}
+  select:focus{outline:2px solid var(--neon);outline-offset:1px}
+  .priv{font-size:12.5px;color:var(--meta);margin-top:12px;line-height:1.4}
   .hp{position:absolute;left:-9999px;opacity:0}
   .err{color:#ff8a7a;font-size:14px;min-height:20px;margin:-4px 0 10px;text-align:left}
 </style>
@@ -89,11 +94,15 @@ fbq('track', 'PageView');
     <input id="nombre" name="nombre" type="text" autocomplete="given-name" required>
     <label for="correo">Correo</label>
     <input id="correo" name="correo" type="email" autocomplete="email" inputmode="email" required>
-    <label for="wa">WhatsApp (con código de país)</label>
-    <input id="wa" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" placeholder="+593 99 123 4567" required>
+    <label for="wa">WhatsApp</label>
+    <div class="tel">
+      <select id="pais" aria-label="País"></select>
+      <input id="wa" name="whatsapp" type="tel" autocomplete="tel-national" inputmode="tel" placeholder="99 123 4567" required>
+    </div>
     <input class="hp" name="web" tabindex="-1" autocomplete="off" aria-hidden="true">
     <div class="err" id="err" role="alert"></div>
     <button type="submit" class="btn" id="enviar">Acceder ahora</button>
+    <p class="priv">Sin spam. Usamos tus datos solo para enviarte el entrenamiento y escribirte sobre Avatar Ads, nada más.</p>
   </form>
 </dialog>
 
@@ -115,6 +124,16 @@ fbq('track', 'PageView');
   h1.innerHTML = h1.getAttribute("data-" + v.toLowerCase());
   if (window.clarity) clarity("set", "variante_titulo", v);
 
+  // ====== País y código de marcación ======
+  var PAISES = [["EC","Ecuador","593"],["CO","Colombia","57"],["MX","México","52"],["PE","Perú","51"],["CL","Chile","56"],["AR","Argentina","54"],["BO","Bolivia","591"],["VE","Venezuela","58"],["UY","Uruguay","598"],["PY","Paraguay","595"],["PA","Panamá","507"],["CR","Costa Rica","506"],["GT","Guatemala","502"],["SV","El Salvador","503"],["HN","Honduras","504"],["NI","Nicaragua","505"],["DO","Rep. Dominicana","1"],["PR","Puerto Rico","1"],["CU","Cuba","53"],["ES","España","34"],["US","Estados Unidos","1"],["CA","Canadá","1"],["BR","Brasil","55"],["GB","Reino Unido","44"],["FR","Francia","33"],["DE","Alemania","49"],["IT","Italia","39"],["PT","Portugal","351"]];
+  var sel = document.getElementById("pais");
+  PAISES.forEach(function(p){ var o = document.createElement("option"); o.value = p[0]; o.setAttribute("data-c", p[2]); o.textContent = p[1] + " +" + p[2]; sel.appendChild(o); });
+  function poner(cc){ cc = (cc||"").toUpperCase(); if (PAISES.some(function(p){ return p[0] === cc; })) { sel.value = cc; return true; } return false; }
+  // 1) idioma del navegador (inmediato)  2) IP del visitante (api.country.is, gratis), que corrige si acierta
+  var reg = ((navigator.language||"").split("-")[1]||""); if (!poner(reg)) sel.value = "EC";
+  var tocado = false; sel.addEventListener("change", function(){ tocado = true; });
+  try { fetch("https://api.country.is/").then(function(r){ return r.json(); }).then(function(d){ if (!tocado && d && d.country) poner(d.country); }).catch(function(){}); } catch(e){}
+
   // ====== Pop-up ======
   var pop = document.getElementById("pop"), form = document.getElementById("form"), err = document.getElementById("err"), btn = document.getElementById("enviar");
   document.querySelectorAll(".abrir").forEach(function(b){ b.addEventListener("click", function(){
@@ -130,10 +149,12 @@ fbq('track', 'PageView');
     e.preventDefault(); err.textContent = "";
     var d = new FormData(form);
     if (d.get("web")) return;  // trampa para bots
-    var nombre = (d.get("nombre")||"").trim(), correo = (d.get("correo")||"").trim(), wa = (d.get("whatsapp")||"").replace(/[^\d+]/g,"");
+    var nombre = (d.get("nombre")||"").trim(), correo = (d.get("correo")||"").trim(), raw = (d.get("whatsapp")||"").trim(), wa;
+    if (raw.charAt(0) === "+") wa = raw.replace(/\D/g,"");                       // si escribe el número completo con +, se respeta
+    else wa = sel.options[sel.selectedIndex].getAttribute("data-c") + raw.replace(/\D/g,"").replace(/^0+/,"");   // código del país + número sin el 0 inicial
     if (!nombre) { err.textContent = "Escribe tu nombre."; return; }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo)) { err.textContent = "Revisa tu correo."; return; }
-    if (wa.replace(/\D/g,"").length < 8) { err.textContent = "Escribe tu WhatsApp con el código de país."; return; }
+    if (wa.length < 9 || wa.length > 15) { err.textContent = "Revisa tu número de WhatsApp."; return; }
     if (!ENDPOINT) { err.textContent = "Falta conectar la hoja (ENDPOINT)."; return; }
     btn.disabled = true; btn.textContent = "Enviando…";
     var body = new URLSearchParams({
