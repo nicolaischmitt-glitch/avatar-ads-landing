@@ -93,9 +93,9 @@ fbq('track', 'PageView');
 <main class="wrap">
   <div class="logo"><img src="../logo-avatar-ads.webp" alt="Avatar Ads"></div>
 
-  <!-- Copy A/B del título y subtítulo: del usuario (7 nov 2026) -->
-  <h1 id="titulo" data-a="Descubre cómo logro crear <span class='b'>ads hiperrealistas</span>, generar decenas de variaciones y escalar mis anuncios con un solo sistema en Claude" data-b="Descubre cómo logro que Claude haga el <span class='b'>trabajo de un equipo agencia</span>: ads hiperrealistas, edición, decenas de variaciones y escala"></h1>
-  <p class="sub">Ads que no parecen hechos con IA, sin herramientas costosas y sin experiencia técnica.</p>
+  <!-- Copy A/B del título y subtítulo: del usuario (7 nov 2026, 2.ª versión). El subtítulo B no lleva "Claude lo hace todo" porque su título ya nombra a Claude -->
+  <h1 id="titulo" data-a="Descubre cómo crear <span class='b'>ads hiperrealistas</span> y decenas de variaciones para encontrar más anuncios que escalen" data-b="Descubre cómo convertí a Claude en <span class='b'>mi director creativo</span>: ads hiperrealistas y decenas de variaciones para testear."></h1>
+  <p class="sub" id="sub" data-a="Claude lo hace todo. Ads que no parecen IA, sin herramientas costosas ni experiencia técnica." data-b="Ads que no parecen IA, sin herramientas costosas ni experiencia técnica."></p>
 
   <!-- Imagen: poner el archivo en landing/entrenamiento/imagen.webp -->
   <button type="button" class="img abrir" aria-label="Quiero ver el entrenamiento gratis">
@@ -159,6 +159,7 @@ fbq('track', 'PageView');
   }
   var h1 = document.getElementById("titulo");
   h1.innerHTML = h1.getAttribute("data-" + v.toLowerCase());
+  var sub = document.getElementById("sub"); sub.textContent = sub.getAttribute("data-" + v.toLowerCase());
   if (window.clarity) clarity("set", "variante_titulo", v);
 
   // ====== País y código de marcación ======
