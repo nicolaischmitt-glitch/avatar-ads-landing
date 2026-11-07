@@ -50,6 +50,18 @@ fbq('track', 'PageView');
   .btn:hover{filter:brightness(1.05)}.btn:active{transform:translateY(2px)}
   .btn:focus-visible,.img:focus-visible{outline:2px solid var(--white);outline-offset:3px}
   .btn[disabled]{opacity:.6;cursor:wait}
+  /* carrusel de anuncios */
+  .ct{font-family:var(--display);font-stretch:112%;font-weight:800;color:var(--white);letter-spacing:-.025em;line-height:1.05;font-size:clamp(24px,6.6vw,34px);margin:56px 0 0}
+  .ct .b{color:var(--neon)}
+  .car{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:22px max(20px,calc((100vw - 520px)/2)) 56px;scroll-padding:0 max(20px,calc((100vw - 520px)/2));scrollbar-width:none}
+  .car::-webkit-scrollbar{display:none}
+  .slot{position:relative;flex:0 0 min(62vw,260px);aspect-ratio:9/16;scroll-snap-align:start;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--bg-2)}
+  .slot video{width:100%;height:100%;object-fit:cover;display:block}
+  .snd{position:absolute;right:10px;bottom:10px;width:40px;height:40px;border-radius:50%;background:rgba(2,6,4,.7);border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+  .snd::before{content:"";width:20px;height:20px;background:var(--white);-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat;
+    --ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 4V5L7 9zM16.5 12a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z'/%3E%3C/svg%3E")}
+  .snd.on{background:var(--neon)}.snd.on::before{background:var(--bg)}
+  .snd:focus-visible{outline:2px solid var(--white);outline-offset:2px}
   /* pop-up */
   dialog{margin:auto;width:calc(100% - 32px);max-width:440px;background:var(--bg-2);color:var(--text-2);border:1px solid var(--line);border-radius:18px;padding:26px 22px 22px;box-shadow:0 30px 80px -20px #000}
   dialog::backdrop{background:rgba(0,0,0,.75);backdrop-filter:blur(3px)}
@@ -83,7 +95,15 @@ fbq('track', 'PageView');
   </button>
 
   <button type="button" class="btn abrir">Quiero ver el entrenamiento gratis</button>
+
+  <!-- Título provisional (el copy se ajusta al final) -->
+  <h2 class="ct">Esta es la calidad de los anuncios del <span class="b">Sistema Avatar Ads.</span></h2>
 </main>
+<div class="car" id="car">
+  <div class="slot"><video src="../videos/ejemplo-serum.mp4" poster="../videos/ejemplo-serum.jpg" playsinline muted loop preload="none" aria-label="Anuncio de un sérum hecho con IA"></video><button type="button" class="snd" aria-label="Activar sonido"></button></div>
+  <div class="slot"><video src="../videos/ejemplo-cumbre-a.mp4" poster="../videos/ejemplo-cumbre-a.jpg" playsinline muted loop preload="none" aria-label="Anuncio de un café hecho con IA"></video><button type="button" class="snd" aria-label="Activar sonido"></button></div>
+  <div class="slot"><video src="../videos/ejemplo-termo-b.mp4" poster="../videos/ejemplo-termo-b.jpg" playsinline muted loop preload="none" aria-label="Anuncio de un termo hecho con IA"></video><button type="button" class="snd" aria-label="Activar sonido"></button></div>
+</div>
 
 <dialog id="pop">
   <button type="button" class="x" id="cerrar" aria-label="Cerrar">×</button>
@@ -133,6 +153,21 @@ fbq('track', 'PageView');
   var reg = ((navigator.language||"").split("-")[1]||""); if (!poner(reg)) sel.value = "EC";
   var tocado = false; sel.addEventListener("change", function(){ tocado = true; });
   try { fetch("https://api.country.is/").then(function(r){ return r.json(); }).then(function(d){ if (!tocado && d && d.country) poner(d.country); }).catch(function(){}); } catch(e){}
+
+  // ====== Carrusel: cada video suena solo si se toca el botón; se reproduce al entrar en pantalla ======
+  var vids = Array.prototype.slice.call(document.querySelectorAll("#car video"));
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){
+      var vd = e.target; if (e.isIntersecting) { vd.play().catch(function(){}); } else { vd.pause(); }
+    }); }, {threshold: .6});
+    vids.forEach(function(vd){ io.observe(vd); });
+  }
+  document.querySelectorAll("#car .snd").forEach(function(b){ b.addEventListener("click", function(){
+    var vd = b.parentNode.querySelector("video"), encender = vd.muted;
+    vids.forEach(function(o){ o.muted = true; }); document.querySelectorAll("#car .snd").forEach(function(x){ x.classList.remove("on"); });
+    if (encender) { vd.muted = false; b.classList.add("on"); vd.play().catch(function(){}); }
+    if (window.fbq) fbq("trackCustom", "CarruselSonido");
+  }); });
 
   // ====== Pop-up ======
   var pop = document.getElementById("pop"), form = document.getElementById("form"), err = document.getElementById("err"), btn = document.getElementById("enviar");
