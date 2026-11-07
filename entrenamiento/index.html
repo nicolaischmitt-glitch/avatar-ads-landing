@@ -154,7 +154,7 @@ fbq('track', 'PageView');
     else wa = sel.options[sel.selectedIndex].getAttribute("data-c") + raw.replace(/\D/g,"").replace(/^0+/,"");   // código del país + número sin el 0 inicial
     if (!nombre) { err.textContent = "Escribe tu nombre."; return; }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo)) { err.textContent = "Revisa tu correo."; return; }
-    if (wa.length < 9 || wa.length > 15) { err.textContent = "Revisa tu número de WhatsApp."; return; }
+    if (wa.length < 9 || wa.length > 15) { err.textContent = "Revisa tu número de celular."; return; }
     if (!ENDPOINT) { err.textContent = "Falta conectar la hoja (ENDPOINT)."; return; }
     btn.disabled = true; btn.textContent = "Enviando…";
     var body = new URLSearchParams({
