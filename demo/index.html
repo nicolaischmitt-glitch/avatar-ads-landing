@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Avatar Ads · Entrenamiento</title>
+<meta name="robots" content="noindex">
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '602723701857782');
+fbq('track', 'PageView');
+</script>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "z7lfue19rh");
+</script>
+<meta name="theme-color" content="#020604">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,600..800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#020604;--bg-2:#090F0B;--neon:#C5F740;--white:#F8F8F8;--text-2:#DDDAD7;--meta:#9F9587;--line:rgba(48,94,74,.55);
+    --display:"Archivo",system-ui,sans-serif;--body:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:
+      radial-gradient(80% 45% at 50% 0%, rgba(48,94,74,.45), transparent 70%),
+      linear-gradient(rgba(48,94,74,.14) 1px, transparent 1px) 0 0/100% 44px, var(--bg);
+    color:var(--text-2);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+  .wrap{max-width:560px;margin:0 auto;padding:14px 20px 48px;text-align:center}
+  .logo img{display:block;margin:0 auto;height:44px;width:auto;mix-blend-mode:screen}
+  h1{font-family:var(--display);font-stretch:112%;font-weight:800;color:var(--white);letter-spacing:-.025em;line-height:1.04;font-size:clamp(28px,8vw,42px);margin:26px 0 22px}
+  h1 .b{color:var(--neon)}
+  .vid{position:relative;width:100%;aspect-ratio:9/16;max-height:72vh;margin:0 auto 22px;border-radius:16px;border:1px solid var(--line);background:var(--bg-2);overflow:hidden}
+  .vid video{width:100%;height:100%;object-fit:contain;display:block;background:#000}
+  .vid .ph{position:absolute;inset:0;display:none;align-items:center;justify-content:center;color:var(--meta);font-size:13px;pointer-events:none}
+  .vid.vacio .ph{display:flex}
+  /* El botón existe en la página pero está oculto hasta que pasa el tiempo */
+  .btn{display:none;align-items:center;justify-content:center;gap:10px;width:100%;text-decoration:none;background:var(--neon);color:var(--bg);font-family:var(--display);font-stretch:108%;font-weight:800;font-size:18px;padding:19px 22px;border-radius:14px;
+    box-shadow:0 0 0 1px rgba(197,247,64,.6),0 14px 34px -14px rgba(197,247,64,.55);transition:transform .12s,filter .2s}
+  .btn.ver{display:flex;animation:ent .6s ease both}
+  .btn:hover{filter:brightness(1.05)}.btn:active{transform:translateY(2px)}
+  .btn:focus-visible{outline:2px solid var(--white);outline-offset:3px}
+  @keyframes ent{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.btn.ver{animation:none}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="logo"><img src="../logo-avatar-ads.webp" alt="Avatar Ads"></div>
+
+  <!-- Título provisional (el copy se ajusta al final) -->
+  <h1>Mira cómo se crea un <span class="b">anuncio con IA</span>, de la idea al video final.</h1>
+
+  <!-- Video: poner el archivo en landing/demo/demo.mp4 (comprimido para web) -->
+  <div class="vid" id="vid">
+    <video id="v" src="demo.mp4" controls playsinline preload="metadata" onerror="document.getElementById('vid').classList.add('vacio')"></video>
+    <span class="ph">demo.mp4 pendiente</span>
+  </div>
+
+  <a class="btn" id="cta" href="https://avatarads.droilab.com/">Quiero el sistema</a>
+</main>
+
+<script>
+(function(){
+  var ESPERA = 120;   // segundos hasta que aparece el botón
+  var VENTA  = "https://avatarads.droilab.com/";
+  var q = new URLSearchParams(location.search);
+  var v = (q.get("v") || "").toUpperCase();
+  if (v !== "A" && v !== "B") { try { v = localStorage.getItem("aa_var_titulo") || ""; } catch(e){} }
+  var espera = parseInt(q.get("t"), 10); if (!(espera >= 0)) espera = ESPERA;   // ?t=5 para probar
+
+  // El botón lleva a la landing de venta con los parámetros de la visita
+  var cta = document.getElementById("cta"), url = new URL(VENTA);
+  ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","fbclid"].forEach(function(k){ if (q.get(k)) url.searchParams.set(k, q.get(k)); });
+  if (v) url.searchParams.set("var_titulo", v);
+  cta.href = url.href;
+
+  // Cuenta desde la primera visita: recargar la página no reinicia el tiempo
+  var ini = Date.now();
+  try { var g = parseInt(sessionStorage.getItem("aa_demo_ini"), 10); if (g) ini = g; else sessionStorage.setItem("aa_demo_ini", ini); } catch(e){}
+  var mostrado = false;
+  function mostrar(){
+    if (mostrado) return; mostrado = true;
+    cta.classList.add("ver");
+    if (window.fbq) fbq("trackCustom", "BotonDemoVisible", {variante: v});
+    if (window.clarity) clarity("event", "demo_boton_visible");
+  }
+  (function tick(){
+    if ((Date.now() - ini) / 1000 >= espera) return mostrar();
+    setTimeout(tick, 500);
+  })();
+
+  cta.addEventListener("click", function(){
+    if (window.fbq) fbq("trackCustom", "ClicDemoAVenta", {variante: v});
+    if (window.clarity) clarity("event", "demo_clic_venta");
+  });
+  var play = false;
+  document.getElementById("v").addEventListener("play", function(){
+    if (play) return; play = true;
+    if (window.fbq) fbq("trackCustom", "DemoPlay", {variante: v});
+    if (window.clarity) clarity("event", "demo_play");
+  });
+})();
+</script>
+</body>
+</html>
