@@ -45,6 +45,10 @@ fbq('track', 'PageView');
   .img img{width:100%;height:100%;object-fit:cover;display:block}
   .img .ph{position:absolute;inset:0;display:none;align-items:center;justify-content:center;color:var(--meta);font-size:13px}
   .img.vacia .ph{display:flex}
+  .play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border-radius:50%;background:rgba(2,6,4,.55);border:1.5px solid rgba(248,248,248,.85);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;animation:pulso 2s ease-out infinite}
+  .play svg{width:34px;height:34px;fill:var(--white);margin-left:4px}
+  @keyframes pulso{0%{box-shadow:0 0 0 0 rgba(197,247,64,.45)}70%,100%{box-shadow:0 0 0 22px rgba(197,247,64,0)}}
+  @media (prefers-reduced-motion:reduce){.play{animation:none}}
   .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:var(--neon);color:var(--bg);font-family:var(--display);font-stretch:108%;font-weight:800;font-size:18px;padding:19px 22px;border-radius:14px;
     box-shadow:0 0 0 1px rgba(197,247,64,.6),0 14px 34px -14px rgba(197,247,64,.55);transition:transform .12s,filter .2s}
   .btn:hover{filter:brightness(1.05)}.btn:active{transform:translateY(2px)}
@@ -99,8 +103,10 @@ fbq('track', 'PageView');
 
   <!-- Imagen: poner el archivo en landing/entrenamiento/imagen.webp -->
   <button type="button" class="img abrir" aria-label="Quiero ver el entrenamiento gratis">
-    <img src="imagen.webp" alt="" onerror="this.parentNode.classList.add('vacia');this.remove()">
+    <img id="portada" src="imagen.webp" alt="" onerror="this.parentNode.classList.add('vacia');this.remove()">
     <span class="ph">imagen.webp pendiente</span>
+    <!-- Botón de play dibujado aquí; la imagen de fondo va sin él -->
+    <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
   </button>
 
   <button type="button" class="btn abrir">Quiero ver el entrenamiento gratis</button>
@@ -157,6 +163,7 @@ fbq('track', 'PageView');
     if (VARIANTES.indexOf(v) < 0) v = VARIANTES[Math.random() < .5 ? 0 : 1];
     try { localStorage.setItem("aa_var_titulo", v); } catch(e){}
   }
+  var ej = q.get("img"); if (/^\d$/.test(ej||"")) document.getElementById("portada").src = "_ejemplos/" + ej + ".webp";   // solo para previsualizar opciones de imagen
   var h1 = document.getElementById("titulo");
   h1.innerHTML = h1.getAttribute("data-" + v.toLowerCase());
   var sub = document.getElementById("sub"); sub.textContent = sub.getAttribute("data-" + v.toLowerCase());
