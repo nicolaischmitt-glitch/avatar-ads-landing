@@ -51,8 +51,11 @@ fbq('track', 'PageView');
   .btn:focus-visible,.img:focus-visible{outline:2px solid var(--white);outline-offset:3px}
   .btn[disabled]{opacity:.6;cursor:wait}
   /* carrusel de anuncios */
-  .ct{font-family:var(--display);font-stretch:112%;font-weight:800;color:var(--white);letter-spacing:-.025em;line-height:1.05;font-size:clamp(24px,6.6vw,34px);margin:56px 0 0}
+  .ct{font-family:var(--display);font-stretch:112%;font-weight:800;color:var(--white);letter-spacing:-.025em;line-height:1.05;font-size:clamp(17px,4.8vw,21px);line-height:1.2;margin:48px 0 0}
   .ct .b{color:var(--neon)}
+  .flecha{display:block;margin:12px auto 0;width:26px;height:26px;color:var(--neon);animation:baja 1.6s ease-in-out infinite}
+  @keyframes baja{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+  @media (prefers-reduced-motion:reduce){.flecha{animation:none}}
   .car{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:22px max(20px,calc((100vw - 520px)/2)) 56px;scroll-padding:0 max(20px,calc((100vw - 520px)/2));scrollbar-width:none}
   .car::-webkit-scrollbar{display:none}
   .slot{position:relative;flex:0 0 min(62vw,260px);aspect-ratio:9/16;scroll-snap-align:start;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--bg-2)}
@@ -98,11 +101,14 @@ fbq('track', 'PageView');
 
   <!-- Título provisional (el copy se ajusta al final) -->
   <h2 class="ct">Esta es la calidad de los anuncios del <span class="b">Sistema Avatar Ads.</span></h2>
+  <svg class="flecha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v15M5 12l7 7 7-7"/></svg>
 </main>
 <div class="car" id="car">
   <div class="slot"><video src="../videos/ejemplo-serum.mp4" poster="../videos/ejemplo-serum.jpg" playsinline muted loop preload="none" aria-label="Anuncio de un sérum hecho con IA"></video><button type="button" class="snd" aria-label="Activar sonido"></button></div>
   <div class="slot"><video src="../videos/ejemplo-cumbre-a.mp4" poster="../videos/ejemplo-cumbre-a.jpg" playsinline muted loop preload="none" aria-label="Anuncio de un café hecho con IA"></video><button type="button" class="snd" aria-label="Activar sonido"></button></div>
   <div class="slot"><video src="../videos/ejemplo-termo-b.mp4" poster="../videos/ejemplo-termo-b.jpg" playsinline muted loop preload="none" aria-label="Anuncio de un termo hecho con IA"></video><button type="button" class="snd" aria-label="Activar sonido"></button></div>
+  <div class="slot"><video src="../videos/ejemplo-dental.mp4" poster="../videos/ejemplo-dental.jpg" playsinline muted loop preload="none" aria-label="Anuncio de una clínica dental hecho con IA"></video><button type="button" class="snd" aria-label="Activar sonido"></button></div>
+  <div class="slot"><video src="../videos/ejemplo-ingles.mp4" poster="../videos/ejemplo-ingles.jpg" playsinline muted loop preload="none" aria-label="Anuncio de una clase de inglés hecho con IA"></video><button type="button" class="snd" aria-label="Activar sonido"></button></div>
 </div>
 
 <dialog id="pop">
