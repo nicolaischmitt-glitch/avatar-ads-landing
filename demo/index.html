@@ -25,6 +25,7 @@ fbq('track', 'PageView');
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,600..800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
 <style>
   :root{--bg:#020604;--bg-2:#090F0B;--neon:#C5F740;--white:#F8F8F8;--text-2:#DDDAD7;--meta:#9F9587;--line:rgba(48,94,74,.55);
     --display:"Archivo",system-ui,sans-serif;--body:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
@@ -34,16 +35,32 @@ fbq('track', 'PageView');
       radial-gradient(80% 45% at 50% 0%, rgba(48,94,74,.45), transparent 70%),
       linear-gradient(rgba(48,94,74,.14) 1px, transparent 1px) 0 0/100% 44px, var(--bg);
     color:var(--text-2);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
-  .wrap{max-width:560px;margin:0 auto;padding:14px 20px 48px;text-align:center}
+  .wrap{max-width:960px;margin:0 auto;padding:14px 16px 48px;text-align:center}
   .logo img{display:block;margin:0 auto;height:44px;width:auto;mix-blend-mode:screen}
-  h1{font-family:var(--display);font-stretch:112%;font-weight:800;color:var(--white);letter-spacing:-.025em;line-height:1.04;font-size:clamp(28px,8vw,42px);margin:26px 0 22px}
+  h1{font-family:var(--display);font-stretch:112%;font-weight:800;color:var(--white);letter-spacing:-.025em;line-height:1.04;font-size:clamp(26px,5.4vw,42px);margin:22px auto 22px;max-width:760px}
   h1 .b{color:var(--neon)}
-  .vid{position:relative;width:100%;aspect-ratio:9/16;max-height:72vh;margin:0 auto 22px;border-radius:16px;border:1px solid var(--line);background:var(--bg-2);overflow:hidden}
+
+  /* reproductor: sin barra para adelantar */
+  .vid{position:relative;width:100%;aspect-ratio:16/9;margin:0 auto 22px;border-radius:16px;border:1px solid var(--line);background:#000;overflow:hidden;
+    -webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
   .vid video{width:100%;height:100%;object-fit:contain;display:block;background:#000}
+  .vid:fullscreen{border-radius:0;border:0}
+  .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(2,6,4,.45);cursor:pointer;border:0;color:var(--white);font:inherit;width:100%}
+  .ov[hidden]{display:none}
+  .ov .pl{width:84px;height:84px;border-radius:50%;background:var(--neon);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 10px rgba(197,247,64,.18),0 14px 34px rgba(0,0,0,.6)}
+  .ov .pl svg{width:34px;height:34px;margin-left:5px}
+  .ov .tx{font-family:var(--display);font-stretch:108%;font-weight:800;font-size:clamp(16px,2.6vw,22px);text-shadow:0 2px 12px rgba(0,0,0,.7)}
+  .bar{position:absolute;left:0;right:0;bottom:0;height:5px;background:rgba(255,255,255,.12);pointer-events:none}
+  .bar i{display:block;height:100%;width:0;background:var(--neon)}
+  .ctl{position:absolute;right:10px;bottom:14px;display:flex;gap:8px;opacity:0;transition:opacity .25s}
+  .vid:hover .ctl,.vid.toque .ctl,.vid.pausa .ctl{opacity:1}
+  .ctl button{width:40px;height:40px;border-radius:10px;border:0;background:rgba(2,6,4,.7);color:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer}
+  .ctl svg{width:20px;height:20px}
   .vid .ph{position:absolute;inset:0;display:none;align-items:center;justify-content:center;color:var(--meta);font-size:13px;pointer-events:none}
   .vid.vacio .ph{display:flex}
+
   /* El botón existe en la página pero está oculto hasta que pasa el tiempo */
-  .btn{display:none;align-items:center;justify-content:center;gap:10px;width:100%;text-decoration:none;background:var(--neon);color:var(--bg);font-family:var(--display);font-stretch:108%;font-weight:800;font-size:18px;padding:19px 22px;border-radius:14px;
+  .btn{display:none;align-items:center;justify-content:center;gap:10px;width:100%;max-width:560px;margin:0 auto;text-decoration:none;background:var(--neon);color:var(--bg);font-family:var(--display);font-stretch:108%;font-weight:800;font-size:18px;padding:19px 22px;border-radius:14px;
     box-shadow:0 0 0 1px rgba(197,247,64,.6),0 14px 34px -14px rgba(197,247,64,.55);transition:transform .12s,filter .2s}
   .btn.ver{display:flex;animation:ent .6s ease both}
   .btn:hover{filter:brightness(1.05)}.btn:active{transform:translateY(2px)}
@@ -59,10 +76,18 @@ fbq('track', 'PageView');
   <!-- Título provisional (el copy se ajusta al final) -->
   <h1>Mira cómo se crea un <span class="b">anuncio con IA</span>, de la idea al video final.</h1>
 
-  <!-- Video: poner el archivo en landing/demo/demo.mp4 (comprimido para web) -->
   <div class="vid" id="vid">
-    <video id="v" src="demo.mp4" controls playsinline preload="metadata" onerror="document.getElementById('vid').classList.add('vacio')"></video>
-    <span class="ph">demo.mp4 pendiente</span>
+    <video id="v" playsinline preload="metadata" poster="poster.jpg" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback"></video>
+    <div class="bar"><i id="bar"></i></div>
+    <div class="ctl">
+      <button type="button" id="snd" aria-label="Silenciar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4z"/><path id="sndw" d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg></button>
+      <button type="button" id="fs" aria-label="Pantalla completa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+    </div>
+    <button type="button" class="ov" id="ov" aria-label="Reproducir">
+      <span class="pl"><svg viewBox="0 0 24 24" fill="#020604"><path d="M6 4l14 8-14 8z"/></svg></span>
+      <span class="tx" id="ovt">Haz clic para ver el entrenamiento</span>
+    </button>
+    <span class="ph">Video no disponible</span>
   </div>
 
   <a class="btn" id="cta" href="https://avatarads.droilab.com/">Quiero el sistema</a>
@@ -97,16 +122,95 @@ fbq('track', 'PageView');
     if ((Date.now() - ini) / 1000 >= espera) return mostrar();
     setTimeout(tick, 500);
   })();
-
   cta.addEventListener("click", function(){
     if (window.fbq) fbq("trackCustom", "ClicDemoAVenta", {variante: v});
     if (window.clarity) clarity("event", "demo_clic_venta");
   });
-  var play = false;
-  document.getElementById("v").addEventListener("play", function(){
-    if (play) return; play = true;
-    if (window.fbq) fbq("trackCustom", "DemoPlay", {variante: v});
-    if (window.clarity) clarity("event", "demo_play");
+
+  // ── Reproductor del VSL ──
+  // · no se puede adelantar: si alguien salta hacia adelante, vuelve a lo que ya vio
+  // · si se va y vuelve, sigue desde donde lo dejó (se guarda en este navegador)
+  // · retención: eventos de Clarity (vsl_5 … vsl_100) y una etiqueta con el % máximo visto
+  var SRC = "vsl/index.m3u8", K_POS = "aa_vsl_pos", K_MAX = "aa_vsl_max";
+  var box = document.getElementById("vid"), vid = document.getElementById("v"), ov = document.getElementById("ov"), ovt = document.getElementById("ovt");
+  var bar = document.getElementById("bar"), snd = document.getElementById("snd"), sndw = document.getElementById("sndw"), fs = document.getElementById("fs");
+  var leer = function(k){ try { return parseFloat(localStorage.getItem(k)) || 0; } catch(e){ return 0; } };
+  var guardar = function(k, x){ try { localStorage.setItem(k, String(Math.round(x * 10) / 10)); } catch(e){} };
+  var pos = leer(K_POS), max = Math.max(leer(K_MAX), pos), arrancado = false, ultimoGuardado = 0;
+
+  if (vid.canPlayType("application/vnd.apple.mpegurl")) vid.src = SRC;
+  else if (window.Hls && Hls.isSupported()) { var hls = new Hls({ startPosition: pos > 2 ? pos : -1, capLevelToPlayerSize: true }); hls.loadSource(SRC); hls.attachMedia(vid); }
+  else box.classList.add("vacio");
+  vid.addEventListener("error", function(){ box.classList.add("vacio"); });
+
+  if (pos > 5) ovt.textContent = "Continuar desde donde lo dejaste";
+
+  function iniciar(){
+    vid.muted = false;
+    if (!arrancado) {
+      arrancado = true;
+      if (pos > 2 && vid.duration && pos < vid.duration - 3) { try { vid.currentTime = pos; } catch(e){} }
+      if (window.clarity) clarity("event", pos > 5 ? "vsl_reanuda" : "vsl_play");
+      if (window.fbq) fbq("trackCustom", "DemoPlay", {variante: v});
+    }
+    var p = vid.play(); if (p && p.catch) p.catch(function(){ ov.hidden = false; });
+  }
+  ov.addEventListener("click", iniciar);
+  vid.addEventListener("loadedmetadata", function(){
+    if (pos > 2 && pos < vid.duration - 3 && Math.abs(vid.currentTime - pos) > 1) { try { vid.currentTime = pos; } catch(e){} }
+    if (pos >= vid.duration - 3) { pos = 0; ovt.textContent = "Ver de nuevo"; }
+    pintar();
+  });
+  // clic sobre el video = pausa / sigue
+  vid.addEventListener("click", function(){ if (vid.paused) iniciar(); else vid.pause(); });
+  vid.addEventListener("contextmenu", function(e){ e.preventDefault(); });
+  vid.addEventListener("play", function(){ ov.hidden = true; box.classList.remove("pausa"); });
+  vid.addEventListener("pause", function(){ box.classList.add("pausa"); guardar(K_POS, vid.currentTime); });
+  vid.addEventListener("ended", function(){ guardar(K_POS, 0); ov.hidden = false; ovt.textContent = "Ver de nuevo"; });
+  box.addEventListener("touchstart", function(){ box.classList.add("toque"); clearTimeout(box._t); box._t = setTimeout(function(){ box.classList.remove("toque"); }, 2500); }, {passive: true});
+
+  // no se puede adelantar (tampoco desde la pantalla completa del iPhone)
+  vid.addEventListener("seeking", function(){
+    if (vid.currentTime > max + 1.5) vid.currentTime = max;
+  });
+  vid.addEventListener("ratechange", function(){ if (vid.playbackRate !== 1) vid.playbackRate = 1; });
+
+  // progreso: la barra avanza rápido al principio y luego más lento (como en el VSL de la landing)
+  function pintar(){ var x = vid.duration ? vid.currentTime / vid.duration : 0; bar.style.width = (100 * (1 - Math.pow(1 - x, 2))).toFixed(2) + "%"; }
+  var HITOS = [5, 10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 95, 100], hechos = {};
+  try { hechos = JSON.parse(localStorage.getItem("aa_vsl_hitos") || "{}"); } catch(e){}
+  vid.addEventListener("timeupdate", function(){
+    var t = vid.currentTime;
+    if (!vid.seeking && t > max && t - max < 3) max = t;
+    pintar();
+    if (Math.abs(t - ultimoGuardado) >= 2) { ultimoGuardado = t; guardar(K_POS, t); guardar(K_MAX, max); }
+    if (!vid.duration) return;
+    var pct = Math.floor(100 * max / vid.duration + 0.5);
+    HITOS.forEach(function(h){
+      if (pct >= h && !hechos[h]) {
+        hechos[h] = 1; try { localStorage.setItem("aa_vsl_hitos", JSON.stringify(hechos)); } catch(e){}
+        if (window.clarity) { clarity("event", "vsl_" + h); clarity("set", "vsl_pct", String(h)); }
+        if (window.fbq && (h === 25 || h === 50 || h === 75 || h === 95)) fbq("trackCustom", "VSL" + h, {variante: v});
+      }
+    });
+  });
+
+  // al salir de la página se guarda y se pausa; al volver sigue donde iba
+  var seguia = false;
+  document.addEventListener("visibilitychange", function(){
+    if (document.hidden) { seguia = !vid.paused; guardar(K_POS, vid.currentTime); guardar(K_MAX, max); if (seguia) vid.pause(); }
+    else if (seguia) { seguia = false; iniciar(); }
+  });
+  window.addEventListener("pagehide", function(){ guardar(K_POS, vid.currentTime); guardar(K_MAX, max); });
+
+  // sonido y pantalla completa
+  snd.addEventListener("click", function(e){ e.stopPropagation(); vid.muted = !vid.muted; sndw.style.display = vid.muted ? "none" : ""; });
+  fs.addEventListener("click", function(e){
+    e.stopPropagation();
+    if (document.fullscreenElement) return document.exitFullscreen();
+    if (box.requestFullscreen) box.requestFullscreen();
+    else if (box.webkitRequestFullscreen) box.webkitRequestFullscreen();
+    else if (vid.webkitEnterFullscreen) vid.webkitEnterFullscreen();
   });
 })();
 </script>
