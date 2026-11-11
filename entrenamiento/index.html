@@ -277,7 +277,8 @@ fbq('track', 'PageView');
     var body = new URLSearchParams({
       paso: "1", nombre: nombre, correo: correo, whatsapp: wa, variante: v,
       fuente: q.get("utm_source")||"", medio: q.get("utm_medium")||"", campana: q.get("utm_campaign")||"", anuncio: q.get("utm_content")||"", fbclid: fbclid,
-      eventId: eventId, fbp: cookie("_fbp"), fbc: fbc, url: location.origin + location.pathname
+      eventId: eventId, fbp: cookie("_fbp"), fbc: fbc, url: location.origin + location.pathname,
+      tec: q.get("tec")||""      // código de "Probar eventos" de Meta, solo en links de prueba (?tec=TEST12345)
     });
     var ir = function(){
       // El Lead se envía aquí, al registrarse: no depende de que contesten las preguntas
