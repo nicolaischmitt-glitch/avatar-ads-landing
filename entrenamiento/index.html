@@ -89,6 +89,15 @@ fbq('track', 'PageView');
   select{flex:0 0 50%;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:12px;color:var(--white);font:inherit;font-size:15px;padding:14px 4px 14px 10px}
   select:focus{outline:2px solid var(--neon);outline-offset:1px}
   .priv{font-size:12.5px;color:var(--meta);margin-top:12px;line-height:1.4}
+  .ultimo{font-size:13px;color:var(--neon);font-weight:600;letter-spacing:.01em;margin-bottom:10px}
+  .prog{height:4px;border-radius:4px;background:rgba(255,255,255,.12);margin-bottom:18px;overflow:hidden}
+  .prog i{display:block;height:100%;width:0;background:var(--neon);border-radius:4px;transition:width .3s}
+  #preg{margin-bottom:16px}
+  .opts{display:grid;gap:10px}
+  .opt{width:100%;text-align:left;padding:15px 16px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--white);font:inherit;font-size:16px;font-weight:500;transition:border-color .15s,background .15s}
+  .opt:hover,.opt:focus-visible{border-color:var(--neon);background:rgba(197,247,64,.07);outline:none}
+  .opt:active{background:rgba(197,247,64,.16)}
+  .saltar{display:block;margin:16px auto 0;font-size:13px;color:var(--meta);text-decoration:underline;text-underline-offset:3px;padding:6px}
   .hp{position:absolute;left:-9999px;opacity:0}
   .err{color:#ff8a7a;font-size:14px;min-height:20px;margin:-4px 0 10px;text-align:left}
 </style>
@@ -147,6 +156,14 @@ fbq('track', 'PageView');
     <button type="submit" class="btn" id="enviar">Acceder ahora</button>
     <p class="priv">Usamos tus datos solo para enviarte el entrenamiento. Tu correo está a salvo y no recibirás spam.</p>
   </form>
+  <!-- Paso 2: preguntas de un toque (el lead ya quedó guardado en el paso 1) -->
+  <div id="paso2" hidden>
+    <p class="ultimo">Último paso · solo toma 10 segundos</p>
+    <div class="prog"><i id="prog"></i></div>
+    <h2 id="preg"></h2>
+    <div id="opts" class="opts"></div>
+    <button type="button" class="saltar" id="saltar">Saltar y ver el entrenamiento</button>
+  </div>
 </dialog>
 
 <script>
@@ -202,7 +219,43 @@ fbq('track', 'PageView');
     if (window.clarity) clarity("event", "abrir_registro_" + v);
   }); });
   document.getElementById("cerrar").addEventListener("click", function(){ pop.close(); });
-  pop.addEventListener("click", function(e){ if (e.target === pop) pop.close(); });
+  pop.addEventListener("click", function(e){ if (e.target === pop && document.getElementById("paso2").hidden) pop.close(); });
+
+  // ====== Paso 2: preguntas ======
+  var PREGUNTAS = [
+    {k: "para",     t: "¿Para quién crearías los anuncios?",  o: ["Para mi negocio", "Para mis clientes", "Todavía no lo sé"]},
+    {k: "invierte", t: "¿Ya inviertes en anuncios?",          o: ["Sí, de forma constante", "Lo he probado", "Aún no"]},
+    {k: "rubro",    t: "¿Cuál es tu rubro?",                  o: ["Producto físico", "Cursos o infoproductos", "Servicios", "Agencia o freelancer", "Otro"]}
+  ];
+  var correoLead = "", resp = {}, pi = 0, enviado = false;
+  var p2 = document.getElementById("paso2");
+  function pasoPreguntas(){
+    form.hidden = true; document.querySelector("#pop > h2").hidden = true; document.querySelector("#pop > p.s").hidden = true;
+    document.getElementById("cerrar").hidden = true; p2.hidden = false;      // sin cerrar: solo "Saltar"
+    pi = 0; pintar();
+  }
+  function pintar(){
+    var p = PREGUNTAS[pi]; document.getElementById("preg").textContent = p.t;
+    document.getElementById("prog").style.width = (pi / PREGUNTAS.length * 100 + 8) + "%";
+    var box = document.getElementById("opts"); box.innerHTML = "";
+    p.o.forEach(function(txt){ var b = document.createElement("button"); b.type = "button"; b.className = "opt"; b.textContent = txt;
+      b.addEventListener("click", function(){ resp[p.k] = txt; pi++; if (pi < PREGUNTAS.length) pintar(); else terminar(); }); box.appendChild(b); });
+  }
+  function terminar(){
+    if (enviado) return; enviado = true;
+    document.getElementById("prog").style.width = "100%";
+    var hay = Object.keys(resp).length > 0;
+    if (hay) {
+      if (window.fbq) fbq("trackCustom", "RespuestasPerfil", {para: resp.para||"", invierte: resp.invierte||"", rubro: resp.rubro||"", variante: v});
+      if (window.clarity) { clarity("event", "perfil_" + (Object.keys(resp).length === PREGUNTAS.length ? "completo" : "parcial")); if (resp.para) clarity("set", "para_quien", resp.para); if (resp.invierte) clarity("set", "invierte_ads", resp.invierte); if (resp.rubro) clarity("set", "rubro", resp.rubro); }
+    }
+    var ir2 = function(){ var next = new URL(SIGUIENTE, location.href); next.searchParams.set("v", v); location.href = next.href; };
+    if (!hay || !ENDPOINT) return ir2();
+    var cuerpo = new URLSearchParams({paso: "2", correo: correoLead, para: resp.para||"", invierte: resp.invierte||"", rubro: resp.rubro||""});
+    Promise.race([ fetch(ENDPOINT, {method: "POST", mode: "no-cors", body: cuerpo, keepalive: true}), new Promise(function(r){ setTimeout(r, 2500); }) ]).then(ir2, ir2);
+  }
+  document.getElementById("saltar").addEventListener("click", terminar);
+  pop.addEventListener("cancel", function(e){ if (!p2.hidden) e.preventDefault(); });   // Esc no cierra durante las preguntas
 
   // ====== Envío ======
   form.addEventListener("submit", function(e){
@@ -222,10 +275,11 @@ fbq('track', 'PageView');
       fuente: q.get("utm_source")||"", medio: q.get("utm_medium")||"", campana: q.get("utm_campaign")||"", anuncio: q.get("utm_content")||"", fbclid: q.get("fbclid")||""
     });
     var ir = function(){
+      // El Lead se envía aquí, al registrarse: no depende de que contesten las preguntas
       if (window.fbq) fbq("track", "Lead", {content_name: "Entrenamiento gratis", variante: v});
       if (window.clarity) clarity("event", "lead_" + v);
-      var next = new URL(SIGUIENTE, location.href); next.searchParams.set("v", v);
-      setTimeout(function(){ location.href = next.href; }, 250);
+      correoLead = correo;
+      pasoPreguntas();
     };
     fetch(ENDPOINT, {method: "POST", mode: "no-cors", body: body}).then(ir).catch(function(){
       btn.disabled = false; btn.textContent = "Acceder ahora"; err.textContent = "No se pudo enviar. Inténtalo otra vez.";

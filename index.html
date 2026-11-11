@@ -715,7 +715,7 @@ fbq('track', 'PageView');
 <!-- ============ LA OFERTA (sistema + curso + soporte + precio + CTA) ============ -->
 <section class="alt" id="inscripcion">
   <div class="wrap narrow">
-    <h2>Por solo $27, <span class="b">esto es todo lo que obtienes.</span></h2>
+    <h2>Por solo $97, <span class="b">esto es todo lo que obtienes.</span></h2>
     <p class="muted">Te llevas el <b class="hl">Sistema Avatar Ads</b> para siempre, el curso para implementarlo paso a paso y soporte cuando lo necesites.</p>
 
     <div class="stack">
@@ -728,8 +728,8 @@ fbq('track', 'PageView');
       </ul>
 
       <div class="stack-total">
-        <div class="price">$27<small>pago único</small></div>
-        <a class="btn" href="https://pay.hotmart.com/G108061829I?checkoutMode=10">Quiero el sistema · $27
+        <div class="price">$97<small>pago único</small></div>
+        <a class="btn" href="https://pay.hotmart.com/G108061829I?checkoutMode=10">Quiero el sistema · $97
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg>
         </a>
         <p class="wa-line">¿Tienes dudas antes de entrar? <a class="wa-link" href="https://wa.me/593990763150?text=Hola%20Nicolai%2C%20tengo%20una%20duda%20sobre%20Avatar%20Ads" target="_blank" rel="noopener">Escríbeme por WhatsApp</a></p>
@@ -773,7 +773,7 @@ fbq('track', 'PageView');
     <img class="final-logo" src="logo-avatar-ads.webp" alt="" width="900" height="330" loading="lazy">
     <h2>Entra hoy. <span class="b">Quédate para siempre.</span></h2>
     <p class="muted" style="margin-bottom:22px">Crea anuncios con IA que escalan tus ventas, 13 veces más económicos y sin conocimientos técnicos.</p>
-    <a class="btn" href="https://pay.hotmart.com/G108061829I?checkoutMode=10">Quiero el sistema · $27
+    <a class="btn" href="https://pay.hotmart.com/G108061829I?checkoutMode=10">Quiero el sistema · $97
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg>
     </a>
   </div>
@@ -1000,11 +1000,11 @@ fbq('track', 'PageView');
     a.addEventListener("click", () => { if (window.fbq) fbq("trackCustom", "ClicCheckout"); vslStat.compra = 1; vslSend(); });
   });
   document.querySelectorAll(".wa-link").forEach((a) => a.addEventListener("click", () => { if (window.fbq) fbq("trackCustom", "ClicWhatsApp"); }));
-  // ViewContent: cuando la oferta ($27) entra en pantalla, una sola vez
+  // ViewContent: cuando la oferta ($97) entra en pantalla, una sola vez
   if ("IntersectionObserver" in window) {
     const vio = new IntersectionObserver((entries) => {
       if (entries.some((e) => e.isIntersecting)) {
-        if (window.fbq) fbq("track", "ViewContent", { content_name: "Avatar Ads 1.0", value: 27, currency: "USD" });
+        if (window.fbq) fbq("track", "ViewContent", { content_name: "Avatar Ads 1.0", value: 97, currency: "USD" });
         vio.disconnect();
       }
     }, { threshold: 0.3 });
