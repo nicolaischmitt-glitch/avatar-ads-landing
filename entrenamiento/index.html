@@ -172,6 +172,7 @@ fbq('track', 'PageView');
   var ENDPOINT  = "https://script.google.com/macros/s/AKfycbz8ZGjycvruvltKDR8e6kpp9vffPkkso70bduIoibi-ug0mhWcJKXOVKEekTTi_GDNb/exec";          // URL de la aplicación web de Google Apps Script (tracking/registro/LEEME.md)
   var SIGUIENTE = "../demo/";    // página del entrenamiento (video demo); por crear
   var VARIANTES = ["A","B"];
+  function cookie(n){ var m = document.cookie.match(new RegExp("(?:^|; )" + n + "=([^;]*)")); return m ? decodeURIComponent(m[1]) : ""; }
 
   // ====== A/B test del título (50/50, se recuerda en el navegador; ?v=A o ?v=B para previsualizar) ======
   var q = new URLSearchParams(location.search), v = (q.get("v")||"").toUpperCase();
@@ -270,20 +271,28 @@ fbq('track', 'PageView');
     if (wa.length < 9 || wa.length > 15) { err.textContent = "Revisa tu número de celular."; return; }
     if (!ENDPOINT) { err.textContent = "Falta conectar la hoja (ENDPOINT)."; return; }
     btn.disabled = true; btn.textContent = "Enviando…";
+    // Para la API de conversiones de Meta (n8n): mismo ID de evento que el pixel (Meta no cuenta el lead dos veces) + cookies de Meta
+    var eventId = "lead-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8);
+    var fbclid = q.get("fbclid")||"", fbc = cookie("_fbc") || (fbclid ? "fb.1." + Date.now() + "." + fbclid : "");
     var body = new URLSearchParams({
-      nombre: nombre, correo: correo, whatsapp: wa, variante: v,
-      fuente: q.get("utm_source")||"", medio: q.get("utm_medium")||"", campana: q.get("utm_campaign")||"", anuncio: q.get("utm_content")||"", fbclid: q.get("fbclid")||""
+      paso: "1", nombre: nombre, correo: correo, whatsapp: wa, variante: v,
+      fuente: q.get("utm_source")||"", medio: q.get("utm_medium")||"", campana: q.get("utm_campaign")||"", anuncio: q.get("utm_content")||"", fbclid: fbclid,
+      eventId: eventId, fbp: cookie("_fbp"), fbc: fbc, url: location.origin + location.pathname
     });
     var ir = function(){
       // El Lead se envía aquí, al registrarse: no depende de que contesten las preguntas
-      if (window.fbq) fbq("track", "Lead", {content_name: "Entrenamiento gratis", variante: v});
+      if (window.fbq) fbq("track", "Lead", {content_name: "Entrenamiento gratis", variante: v}, {eventID: eventId});
       if (window.clarity) clarity("event", "lead_" + v);
       correoLead = correo;
       pasoPreguntas();
     };
-    fetch(ENDPOINT, {method: "POST", mode: "no-cors", body: body}).then(ir).catch(function(){
+    // No se hace esperar a la persona más de 4 s (si el servidor tarda en despertar, el envío sigue en segundo plano)
+    var listo = false, seguir = function(){ if (!listo) { listo = true; ir(); } };
+    fetch(ENDPOINT, {method: "POST", mode: "no-cors", body: body, keepalive: true}).then(seguir).catch(function(){
+      if (listo) return;
       btn.disabled = false; btn.textContent = "Acceder ahora"; err.textContent = "No se pudo enviar. Inténtalo otra vez.";
     });
+    setTimeout(seguir, 4000);
   });
 })();
 </script>
