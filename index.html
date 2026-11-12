@@ -1011,5 +1011,23 @@ fbq('track', 'PageView');
     vio.observe(pricing);
   }
 </script>
+<!-- Conteo de visitas (dashboard interno): fecha, página, origen y versión del título. Sin datos personales. -->
+<script>
+(function(){
+  try {
+    var q = new URLSearchParams(location.search);
+    if (q.get("nocontar") === "1") { localStorage.setItem("aa_no_contar", "1"); }   // abre la página con ?nocontar=1 una vez: ese navegador no se cuenta
+    if (localStorage.getItem("aa_no_contar") || navigator.webdriver || /bot|crawl|spider|headless|lighthouse/i.test(navigator.userAgent)) return;
+    var id = localStorage.getItem("aa_visitante");
+    if (!id) { id = Math.random().toString(36).slice(2, 10) + Date.now().toString(36); localStorage.setItem("aa_visitante", id); }
+    var src = (q.get("utm_source") || "").toLowerCase();
+    if (src) localStorage.setItem("aa_fuente", src); else src = localStorage.getItem("aa_fuente") || "";
+    var v = (q.get("v") || "").toUpperCase();
+    if (v !== "A" && v !== "B") v = localStorage.getItem("aa_var_titulo") || "";
+    fetch("https://n8n-visasidv.onrender.com/webhook/avatar-ads-registro", { method: "POST", mode: "no-cors", keepalive: true,
+      body: new URLSearchParams({ paso: "visita", pagina: location.pathname, fuente: src, variante: v, visitante: id }) });
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
