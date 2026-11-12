@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RUMBO · Termo ligero para la montaña</title>
+<meta name="description" content="RUMBO: termo de 1,5 litros, ligero, que mantiene el agua fría 24 horas y caliente 12 horas. Hecho para el hiking, el trote y el movimiento.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --carbon: #14191C; --carbon-2: #1C2327; --bosque: #2F5D46; --naranja: #D25630;
+    --hueso: #F7F4EC; --gris: #A9B0AD; --linea: #2B3438;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--carbon); color: var(--hueso); font: 400 17px/1.6 Inter, system-ui, sans-serif; }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  h1, h2, h3, .logo { font-family: "Barlow Condensed", sans-serif; text-transform: uppercase; letter-spacing: .02em; line-height: 1.02; }
+  header { border-bottom: 1px solid var(--linea); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .logo { font-size: 30px; font-weight: 700; text-decoration: none; }
+  nav a { margin-left: 22px; font-size: 14px; color: var(--gris); text-decoration: none; }
+  nav a:hover { color: var(--hueso); }
+  .btn { display: inline-block; background: var(--naranja); color: var(--carbon); font-weight: 600; padding: 15px 28px; border-radius: 6px; text-decoration: none; }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; padding-top: 64px; padding-bottom: 72px; }
+  .hero h1 { font-size: clamp(46px, 7vw, 84px); margin-bottom: 20px; }
+  .hero p { color: var(--gris); font-size: 19px; max-width: 480px; margin-bottom: 30px; }
+  .precio { margin-left: 16px; font-family: "Barlow Condensed", sans-serif; font-size: 30px; vertical-align: middle; }
+  .foto { background: #E9E5DD; border-radius: 14px; overflow: hidden; }
+  .foto img { display: block; width: 100%; height: auto; }
+  section { padding: 72px 0; border-top: 1px solid var(--linea); }
+  h2 { font-size: clamp(34px, 5vw, 52px); margin-bottom: 18px; }
+  .intro { color: var(--gris); max-width: 640px; margin-bottom: 40px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+  .card { background: var(--carbon-2); border: 1px solid var(--linea); border-left: 3px solid var(--bosque); border-radius: 10px; padding: 24px; }
+  .card h3 { font-size: 28px; margin-bottom: 8px; }
+  .card p { color: var(--gris); font-size: 15px; }
+  .ficha { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; max-width: 720px; }
+  .ficha div { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--linea); font-size: 15px; }
+  .ficha span:first-child { color: var(--gris); }
+  .historia p { max-width: 680px; color: var(--gris); margin-bottom: 16px; }
+  details { border-bottom: 1px solid var(--linea); padding: 18px 0; max-width: 760px; }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { color: var(--gris); margin-top: 10px; }
+  .cierre { text-align: center; }
+  .cierre p { color: var(--gris); margin: 0 auto 28px; max-width: 520px; }
+  footer { border-top: 1px solid var(--linea); padding: 28px 0 40px; color: var(--gris); font-size: 13px; }
+  @media (max-width: 760px) {
+    nav { display: none; }
+    .hero .wrap { grid-template-columns: 1fr; padding-top: 40px; }
+    .hero .foto { order: -1; max-width: 360px; }
+    .ficha { grid-template-columns: 1fr; }
+    .wrap { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#">Rumbo</a>
+    <nav>
+      <a href="#termo">El termo</a>
+      <a href="#historia">Nuestra historia</a>
+      <a href="#preguntas">Preguntas</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Agua fría hasta la cima. Sin cargar de más.</h1>
+        <p>RUMBO es el termo de 1,5 litros hecho para los que se mueven: mantiene el agua fría 24 horas y caliente 12 horas, y es tan ligero que te olvidas de que lo llevas.</p>
+        <a class="btn" href="#comprar">Comprar ahora</a><span class="precio">$39</span>
+      </div>
+      <div class="foto"><img src="termo-rumbo.webp" alt="Termo RUMBO verde bosque con líneas topográficas, tapa negra y asa de cordón naranja" width="700" height="1254"></div>
+    </div>
+  </div>
+
+  <section id="termo">
+    <div class="wrap">
+      <h2>Hecho para moverte</h2>
+      <p class="intro">Diseñado para el hiking, el trote y el gimnasio. Lo importante va adentro; lo que no hace falta, se queda en casa.</p>
+      <div class="grid">
+        <div class="card"><h3>24 h frío</h3><p>Sales al amanecer y el agua sigue fría cuando llegas arriba.</p></div>
+        <div class="card"><h3>12 h caliente</h3><p>Café o té caliente para la madrugada en la montaña.</p></div>
+        <div class="card"><h3>Ligero</h3><p>Pensado para correr y caminar sin sentir peso de más en la mochila.</p></div>
+        <div class="card"><h3>Tapa hermética</h3><p>Va de lado en la mochila sin gotear.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Ficha técnica</h2>
+      <div class="ficha">
+        <div><span>Capacidad</span><span>1,5 litros</span></div>
+        <div><span>Frío</span><span>hasta 24 horas</span></div>
+        <div><span>Caliente</span><span>hasta 12 horas</span></div>
+        <div><span>Color</span><span>Verde bosque</span></div>
+        <div><span>Tapa</span><span>Negra mate con aro naranja</span></div>
+        <div><span>Asa</span><span>Cordón naranja</span></div>
+        <div><span>Base</span><span>Goma negra antideslizante</span></div>
+        <div><span>Diseño</span><span>Líneas topográficas grabadas</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="historia" class="historia">
+    <div class="wrap">
+      <h2>Nuestra historia</h2>
+      <p>RUMBO nació en la montaña, al amanecer, con una botella pesada en la mochila y el agua tibia a mitad del camino.</p>
+      <p>Queríamos un termo que se pudiera llevar a todas partes: al sendero, al trote de la mañana y al gimnasio. Que aguantara el día entero y que no pesara. Como no lo encontramos, lo hicimos.</p>
+      <p>Las líneas del termo son un mapa topográfico: un recordatorio de que siempre hay un camino un poco más arriba.</p>
+    </div>
+  </section>
+
+  <section id="preguntas">
+    <div class="wrap">
+      <h2>Preguntas frecuentes</h2>
+      <details><summary>¿Cuánto tiempo mantiene el agua fría?</summary><p>Hasta 24 horas fría y hasta 12 horas caliente.</p></details>
+      <details><summary>¿Cuánta agua le cabe?</summary><p>1,5 litros: suficiente para una caminata larga.</p></details>
+      <details><summary>¿En qué colores viene?</summary><p>Por ahora, solo en verde bosque.</p></details>
+      <details><summary>¿Cuánto dura?</summary><p>Está hecho para acompañarte durante años de caminatas y entrenamientos.</p></details>
+      <details><summary>¿Hacen envíos?</summary><p>Vendemos en toda Latinoamérica a través de nuestra tienda en línea.</p></details>
+    </div>
+  </section>
+
+  <section id="comprar" class="cierre">
+    <div class="wrap">
+      <h2>Tu próximo camino empieza aquí</h2>
+      <p>Termo RUMBO de 1,5 litros, verde bosque.</p>
+      <a class="btn" href="#comprar">Comprar ahora · $39</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© RUMBO · Sitio de demostración: RUMBO es una marca ficticia creada para un curso. No se realizan ventas.</div>
+</footer>
+
+</body>
+</html>
