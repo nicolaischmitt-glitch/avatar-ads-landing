@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>¡Ya estás dentro! · Avatar Ads 1.0</title>
 <!-- Página de gracias: Hotmart redirige aquí después de la compra. No se indexa ni se enlaza desde la landing. -->
-<!-- El acceso al sistema y al curso llega por correo; esta página no lleva el link de Drive ni el de WhatsApp. -->
+<!-- Desde el 13 nov 2026 el sistema y el curso viven en el área de miembros de Hotmart: esta página solo lleva al área de miembros y ofrece el servicio extra por WhatsApp (sin precios). -->
 <meta name="robots" content="noindex, nofollow">
-<!-- Meta Pixel: solo PageView. La compra (Purchase) la envía Hotmart con su pixel + API; no duplicarla aquí. -->
+<!-- Meta Pixel: PageView + clics propios. La compra (Purchase) la envía Hotmart con su pixel + API; no duplicarla aquí. -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -16,6 +16,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '602723701857782');
 fbq('track', 'PageView');
+function ev(n){try{fbq('trackCustom',n)}catch(e){}}
 </script>
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=602723701857782&ev=PageView&noscript=1"></noscript>
 <meta name="theme-color" content="#020604">
@@ -46,13 +47,28 @@ fbq('track', 'PageView');
   .logo{display:flex;justify-content:center;padding:22px 0 8px}
   .logo img{display:block;height:44px;width:auto;mix-blend-mode:screen}
 
-  .hero{text-align:center;padding:30px 0 44px}
+  .hero{text-align:center;padding:30px 0 36px}
   .check{width:64px;height:64px;margin:0 auto;border-radius:50%;display:grid;place-items:center;background:var(--neon-soft);border:1px solid rgba(197,247,64,.5);box-shadow:0 0 30px -6px rgba(197,247,64,.5)}
   h1{font-family:var(--display);font-stretch:112%;color:var(--white);letter-spacing:-.025em;line-height:1.04;font-weight:800;font-size:clamp(32px,9vw,44px);margin:22px 0 14px}
   h1 .b{color:var(--neon)}
-  .lead{font-size:17px}
+  .lead{font-size:17px;margin-bottom:26px}
   .lead strong{color:var(--white);font-weight:600}
-  .note{font-size:14px;margin-top:14px;color:var(--meta)}
+
+  .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;text-decoration:none;font-family:var(--display);font-stretch:108%;font-weight:700;letter-spacing:-.01em;border-radius:14px;-webkit-tap-highlight-color:transparent;transition:transform .15s,box-shadow .2s,background .2s}
+  .btn:active{transform:scale(.98)}
+  .btn-main{background:var(--neon);color:#0A1206;font-size:19px;padding:20px 18px;box-shadow:0 0 0 1px rgba(197,247,64,.6),0 10px 40px -8px rgba(197,247,64,.55)}
+  .btn-main:hover{box-shadow:0 0 0 1px rgba(197,247,64,.8),0 12px 48px -6px rgba(197,247,64,.75)}
+  .btn-alt{background:transparent;color:var(--white);font-size:16px;padding:16px 18px;border:1px solid rgba(197,247,64,.55)}
+  .btn-alt:hover{background:var(--neon-soft)}
+
+  .service{margin:6px 0 48px;padding:26px 22px 22px;border-radius:20px;background:#090F0B;border:1px solid rgba(48,94,74,.7)}
+  .service h2{font-family:var(--display);font-stretch:110%;color:var(--white);font-weight:800;letter-spacing:-.02em;line-height:1.1;font-size:clamp(22px,6.4vw,28px)}
+  .service h2 .b{color:var(--neon)}
+  .service .sub{font-size:15px;margin:10px 0 18px}
+  .list{list-style:none;display:grid;gap:12px;margin-bottom:24px}
+  .list li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px;color:var(--white)}
+  .list svg{flex:none;margin-top:3px}
+  .small{font-size:13px;color:var(--meta);text-align:center;margin-top:12px}
 </style>
 </head>
 <body>
@@ -65,8 +81,24 @@ fbq('track', 'PageView');
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#C5F740" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
     </div>
     <h1>¡Ya estás dentro de <span class="b">Avatar Ads</span>!</h1>
-    <p class="lead"><strong>Revisa tu correo:</strong> te enviamos el acceso al sistema y al curso.</p>
-    <p class="note">Búscalo en el correo con el que compraste. Si no lo ves, revisa spam o promociones.</p>
+    <p class="lead">Tu sistema y tu curso te esperan en el <strong>área de miembros</strong>.</p>
+    <a class="btn btn-main" href="https://hotmart.com/es/club/skool-partner-5-day-challenge/products/8745955" onclick="ev('ClicAreaMiembros')">Entrar al área de miembros
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </section>
+
+  <section class="service">
+    <h2>¿Quieres que lo <span class="b">hagamos contigo?</span></h2>
+    <p class="sub">Servicio opcional para mejorar los resultados de tus anuncios. Esto podemos hacer por ti:</p>
+    <ul class="list">
+      <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C5F740" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Instalo el sistema y configuro tu negocio</span></li>
+      <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C5F740" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Creamos tus anuncios juntos, o los creo por ti</span></li>
+      <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C5F740" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Conectamos un dashboard con tus métricas reales</span></li>
+      <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C5F740" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Manejo tu campaña durante las semanas que acordemos</span></li>
+      <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C5F740" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>O te acompaño paso a paso para que lo hagas tú</span></li>
+    </ul>
+    <a class="btn btn-alt" href="https://wa.me/593990763150?text=hola%2C%20me%20interesa%20conocer%20mas%20sobre%20el%20servicio%20de%20ads%20para%20escalar%20mi%20negocio" target="_blank" rel="noopener" onclick="ev('ClicWhatsAppServicio')">Escríbeme por WhatsApp</a>
+    <p class="small">Lo conversamos y vemos qué necesitas.</p>
   </section>
 </main>
 
